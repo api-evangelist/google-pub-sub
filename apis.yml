@@ -1,0 +1,28 @@
+aid: google-pub-sub
+name: Google Pub/Sub
+description: >-
+  Google Cloud Pub/Sub is a messaging and event ingestion service for streaming analytics and event-driven computing.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Microservices
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/google-pub-sub/refs/heads/main/apis.yml
+created: '2026-03-26'
+modified: '2026-03-26'
+specificationVersion: '0.19'
+apis:
+  - aid: google-pub-sub:google-pub-sub
+    name: Google Pub/Sub
+    description: >-
+      Google Cloud Pub/Sub is a messaging and event ingestion service for streaming analytics and event-driven computing.
+    humanURL: https://cloud.google.com/
+    tags:
+      - Microservices
+    properties: []
+common:
+  - type: Website
+    url: https://cloud.google.com/
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
