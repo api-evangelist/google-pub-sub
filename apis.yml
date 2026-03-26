@@ -35,7 +35,19 @@ apis:
       - Google Cloud
       - Streaming
       - Cloud
-    properties: []
+    properties:
+      - type: OpenAPI
+        url: >-
+          https://raw.githubusercontent.com/api-evangelist/google-pub-sub/refs/heads/main/openapi/google-pub-sub-openapi.yml
+      - type: AsyncAPI
+        url: >-
+          https://raw.githubusercontent.com/api-evangelist/google-pub-sub/refs/heads/main/asyncapi/google-pub-sub-asyncapi.yml
+      - type: JSONSchema
+        url: >-
+          https://raw.githubusercontent.com/api-evangelist/google-pub-sub/refs/heads/main/json-schema/google-pub-sub-topic.yml
+      - type: JSONSchema
+        url: >-
+          https://raw.githubusercontent.com/api-evangelist/google-pub-sub/refs/heads/main/json-schema/google-pub-sub-message.yml
 common:
   - type: Website
     url: https://cloud.google.com/pubsub

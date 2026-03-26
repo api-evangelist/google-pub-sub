@@ -1,0 +1,158 @@
+asyncapi: 2.6.0
+info:
+  title: Google Cloud Pub/Sub
+  version: v1
+  description: >-
+    Google Cloud Pub/Sub is a fully managed real-time messaging service that
+    allows you to send and receive messages between independent applications.
+    This AsyncAPI spec describes the event-driven messaging patterns for
+    publishing and subscribing to messages via Pub/Sub topics.
+  contact:
+    name: Google Cloud
+    url: https://cloud.google.com/pubsub
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+  google-cloud:
+    url: pubsub.googleapis.com
+    protocol: https
+    description: Google Cloud Pub/Sub service endpoint
+channels:
+  projects/{projectId}/topics/{topicId}:
+    description: >-
+      A named resource to which messages are sent by publishers and from which
+      messages are delivered to subscribers.
+    parameters:
+      projectId:
+        description: The Google Cloud project ID.
+        schema:
+          type: string
+      topicId:
+        description: The Pub/Sub topic ID.
+        schema:
+          type: string
+    publish:
+      operationId: publishMessage
+      summary: Publish a message to a topic
+      description: >-
+        Publishers send messages to a Pub/Sub topic. Messages contain a
+        base64-encoded data payload and optional attributes.
+      message:
+        $ref: '#/components/messages/PubsubMessage'
+    subscribe:
+      operationId: receiveMessage
+      summary: Receive a message from a topic via subscription
+      description: >-
+        Subscribers receive messages delivered from a topic either via push
+        (HTTP POST to an endpoint) or pull (polling the Pub/Sub API).
+      message:
+        $ref: '#/components/messages/PubsubMessage'
+  projects/{projectId}/subscriptions/{subscriptionId}:
+    description: >-
+      A named resource representing the stream of messages from a single
+      specific topic to be delivered to the subscribing application.
+    parameters:
+      projectId:
+        description: The Google Cloud project ID.
+        schema:
+          type: string
+      subscriptionId:
+        description: The subscription ID.
+        schema:
+          type: string
+    subscribe:
+      operationId: pullMessage
+      summary: Pull messages from a subscription
+      description: >-
+        Pull messages from a subscription. The subscriber acknowledges
+        messages after processing them.
+      message:
+        $ref: '#/components/messages/ReceivedMessage'
+components:
+  messages:
+    PubsubMessage:
+      name: PubsubMessage
+      title: Pub/Sub Message
+      summary: A message published to or received from a Pub/Sub topic.
+      contentType: application/json
+      payload:
+        type: object
+        properties:
+          data:
+            type: string
+            format: byte
+            description: The message data field (base64 encoded).
+          attributes:
+            type: object
+            additionalProperties:
+              type: string
+            description: Attributes for this message as key-value pairs.
+          messageId:
+            type: string
+            description: ID of this message assigned by the server at publication time.
+          publishTime:
+            type: string
+            format: date-time
+            description: The time at which the message was published.
+          orderingKey:
+            type: string
+            description: Key for ordering delivery to subscribers.
+    ReceivedMessage:
+      name: ReceivedMessage
+      title: Received Message
+      summary: A message received from a subscription with acknowledgement metadata.
+      contentType: application/json
+      payload:
+        type: object
+        properties:
+          ackId:
+            type: string
+            description: Acknowledgement ID used to acknowledge the message.
+          message:
+            type: object
+            properties:
+              data:
+                type: string
+                format: byte
+              attributes:
+                type: object
+                additionalProperties:
+                  type: string
+              messageId:
+                type: string
+              publishTime:
+                type: string
+                format: date-time
+              orderingKey:
+                type: string
+          deliveryAttempt:
+            type: integer
+            description: The approximate number of times the message has been delivered.
+    PushNotification:
+      name: PushNotification
+      title: Push Notification
+      summary: >-
+        HTTP POST body sent by Pub/Sub to a push subscription endpoint.
+      contentType: application/json
+      payload:
+        type: object
+        properties:
+          message:
+            type: object
+            properties:
+              data:
+                type: string
+                format: byte
+              attributes:
+                type: object
+                additionalProperties:
+                  type: string
+              messageId:
+                type: string
+              publishTime:
+                type: string
+                format: date-time
+          subscription:
+            type: string
+            description: The full subscription resource name.

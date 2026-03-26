@@ -1,0 +1,31 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: google-pub-sub-message
+title: Google Pub/Sub Message
+description: A message that is sent to and received from a Pub/Sub topic.
+type: object
+properties:
+  data:
+    type: string
+    format: byte
+    description: >-
+      The message data field. A base64-encoded string. Maximum size is
+      10MB.
+  attributes:
+    type: object
+    additionalProperties:
+      type: string
+    description: >-
+      Attributes for this message. Attributes can be used to filter
+      messages on the subscription.
+  messageId:
+    type: string
+    description: ID of this message, assigned by the server when the message is published.
+  publishTime:
+    type: string
+    format: date-time
+    description: The time at which the message was published.
+  orderingKey:
+    type: string
+    description: >-
+      If non-empty, identifies related messages for which publish order
+      should be respected.

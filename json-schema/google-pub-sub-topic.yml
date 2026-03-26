@@ -1,0 +1,68 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: google-pub-sub-topic
+title: Google Pub/Sub Topic
+description: A named resource to which messages are sent by publishers.
+type: object
+properties:
+  name:
+    type: string
+    description: >-
+      The name of the topic in the format
+      projects/{project}/topics/{topic}.
+  labels:
+    type: object
+    additionalProperties:
+      type: string
+    description: Key-value labels for the topic.
+  messageStoragePolicy:
+    type: object
+    description: Policy constraining storage of messages published to the topic.
+    properties:
+      allowedPersistenceRegions:
+        type: array
+        items:
+          type: string
+        description: Regions where messages may be stored.
+      enforceInTransit:
+        type: boolean
+  kmsKeyName:
+    type: string
+    description: >-
+      Resource name of Cloud KMS CryptoKey for protecting messages
+      published on this topic.
+  schemaSettings:
+    type: object
+    description: Settings for validating messages published against a schema.
+    properties:
+      schema:
+        type: string
+      encoding:
+        type: string
+        enum:
+          - ENCODING_UNSPECIFIED
+          - JSON
+          - BINARY
+      firstRevisionId:
+        type: string
+      lastRevisionId:
+        type: string
+  satisfiesPzs:
+    type: boolean
+    description: Whether the topic satisfies PZS.
+  messageRetentionDuration:
+    type: string
+    description: >-
+      How long to retain unacknowledged messages published to the topic
+      (e.g., 604800s for 7 days).
+  state:
+    type: string
+    enum:
+      - STATE_UNSPECIFIED
+      - ACTIVE
+      - INGESTION_RESOURCE_ERROR
+    description: Output only. The state of the topic.
+  ingestionDataSourceSettings:
+    type: object
+    description: Settings for ingestion from a data source into this topic.
+required:
+  - name

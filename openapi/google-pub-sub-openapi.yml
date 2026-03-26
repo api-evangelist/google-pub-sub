@@ -1,0 +1,865 @@
+openapi: 3.1.0
+info:
+  title: Google Cloud Pub/Sub API
+  description: >-
+    Provides reliable, many-to-many, asynchronous messaging between
+    applications. The Pub/Sub API allows you to create and manage topics and
+    subscriptions, publish messages, and pull or push messages to subscribers.
+  version: v1
+  contact:
+    name: Google Cloud
+    url: https://cloud.google.com/pubsub
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+  - url: https://pubsub.googleapis.com
+    description: Google Cloud Pub/Sub API
+paths:
+  /v1/projects/{project}/topics:
+    get:
+      operationId: listTopics
+      summary: List topics
+      description: Lists matching topics in the given project.
+      tags:
+        - Topics
+      parameters:
+        - name: project
+          in: path
+          required: true
+          description: The project ID (e.g., projects/my-project).
+          schema:
+            type: string
+        - name: pageSize
+          in: query
+          description: Maximum number of topics to return.
+          schema:
+            type: integer
+        - name: pageToken
+          in: query
+          description: Token for pagination.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTopicsResponse'
+  /v1/projects/{project}/topics/{topic}:
+    get:
+      operationId: getTopic
+      summary: Get a topic
+      description: Gets the configuration of a topic.
+      tags:
+        - Topics
+      parameters:
+        - name: project
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: topic
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Topic'
+    put:
+      operationId: createTopic
+      summary: Create a topic
+      description: >-
+        Creates the given topic with the given name. The topic name must be
+        unique within the project.
+      tags:
+        - Topics
+      parameters:
+        - name: project
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: topic
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Topic'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Topic'
+    delete:
+      operationId: deleteTopic
+      summary: Delete a topic
+      description: >-
+        Deletes the topic with the given name. Existing subscriptions to this
+        topic are not deleted but their topic field is set to _deleted-topic_.
+      tags:
+        - Topics
+      parameters:
+        - name: project
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: topic
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+  /v1/{topic}:
+    patch:
+      operationId: updateTopic
+      summary: Update a topic
+      description: Updates an existing topic by updating the fields specified in the update mask.
+      tags:
+        - Topics
+      parameters:
+        - name: topic
+          in: path
+          required: true
+          description: The name of the topic (e.g., projects/my-project/topics/my-topic).
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                topic:
+                  $ref: '#/components/schemas/Topic'
+                updateMask:
+                  type: string
+                  description: Fields to update.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Topic'
+  /v1/{topic}:publish:
+    post:
+      operationId: publish
+      summary: Publish messages
+      description: >-
+        Adds one or more messages to the topic. Returns NOT_FOUND if the topic
+        does not exist.
+      tags:
+        - Publish
+      parameters:
+        - name: topic
+          in: path
+          required: true
+          description: The topic name (e.g., projects/my-project/topics/my-topic).
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PublishRequest'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+  /v1/projects/{project}/subscriptions:
+    get:
+      operationId: listSubscriptions
+      summary: List subscriptions
+      description: Lists matching subscriptions in the given project.
+      tags:
+        - Subscriptions
+      parameters:
+        - name: project
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: pageSize
+          in: query
+          schema:
+            type: integer
+        - name: pageToken
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSubscriptionsResponse'
+  /v1/projects/{project}/subscriptions/{subscription}:
+    get:
+      operationId: getSubscription
+      summary: Get a subscription
+      description: Gets the configuration details of a subscription.
+      tags:
+        - Subscriptions
+      parameters:
+        - name: project
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: subscription
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+    put:
+      operationId: createSubscription
+      summary: Create a subscription
+      description: >-
+        Creates a subscription to a given topic. If the subscription already
+        exists, returns ALREADY_EXISTS.
+      tags:
+        - Subscriptions
+      parameters:
+        - name: project
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: subscription
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Subscription'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+    delete:
+      operationId: deleteSubscription
+      summary: Delete a subscription
+      description: Deletes an existing subscription.
+      tags:
+        - Subscriptions
+      parameters:
+        - name: project
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: subscription
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+  /v1/{subscription}:pull:
+    post:
+      operationId: pull
+      summary: Pull messages
+      description: >-
+        Pulls messages from the server. The server may return UNAVAILABLE if
+        there are too many concurrent pull requests pending for the given
+        subscription.
+      tags:
+        - Subscribe
+      parameters:
+        - name: subscription
+          in: path
+          required: true
+          description: The subscription name.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PullRequest'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PullResponse'
+  /v1/{subscription}:acknowledge:
+    post:
+      operationId: acknowledge
+      summary: Acknowledge messages
+      description: >-
+        Acknowledges the messages associated with the ack_ids in the
+        AcknowledgeRequest. The Pub/Sub system can remove the relevant messages
+        from the subscription.
+      tags:
+        - Subscribe
+      parameters:
+        - name: subscription
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ackIds
+              properties:
+                ackIds:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        '200':
+          description: Successful response
+  /v1/{subscription}:modifyAckDeadline:
+    post:
+      operationId: modifyAckDeadline
+      summary: Modify acknowledgement deadline
+      description: >-
+        Modifies the ack deadline for a specific message. Useful to indicate
+        that more time is needed to process a message.
+      tags:
+        - Subscribe
+      parameters:
+        - name: subscription
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ackIds
+                - ackDeadlineSeconds
+              properties:
+                ackIds:
+                  type: array
+                  items:
+                    type: string
+                ackDeadlineSeconds:
+                  type: integer
+      responses:
+        '200':
+          description: Successful response
+  /v1/projects/{project}/snapshots:
+    get:
+      operationId: listSnapshots
+      summary: List snapshots
+      description: Lists the existing snapshots in the given project.
+      tags:
+        - Snapshots
+      parameters:
+        - name: project
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: pageSize
+          in: query
+          schema:
+            type: integer
+        - name: pageToken
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSnapshotsResponse'
+  /v1/projects/{project}/snapshots/{snapshot}:
+    get:
+      operationId: getSnapshot
+      summary: Get a snapshot
+      description: Gets the configuration details of a snapshot.
+      tags:
+        - Snapshots
+      parameters:
+        - name: project
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: snapshot
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Snapshot'
+    put:
+      operationId: createSnapshot
+      summary: Create a snapshot
+      description: >-
+        Creates a snapshot from the requested subscription. Snapshots are used
+        for the seek operation.
+      tags:
+        - Snapshots
+      parameters:
+        - name: project
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: snapshot
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - subscription
+              properties:
+                subscription:
+                  type: string
+                labels:
+                  type: object
+                  additionalProperties:
+                    type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Snapshot'
+    delete:
+      operationId: deleteSnapshot
+      summary: Delete a snapshot
+      description: Removes an existing snapshot.
+      tags:
+        - Snapshots
+      parameters:
+        - name: project
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: snapshot
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+  /v1/projects/{project}/schemas:
+    get:
+      operationId: listSchemas
+      summary: List schemas
+      description: Lists schemas in a project.
+      tags:
+        - Schemas
+      parameters:
+        - name: project
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: pageSize
+          in: query
+          schema:
+            type: integer
+        - name: pageToken
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  schemas:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Schema'
+                  nextPageToken:
+                    type: string
+    post:
+      operationId: createSchema
+      summary: Create a schema
+      description: Creates a schema.
+      tags:
+        - Schemas
+      parameters:
+        - name: project
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: schemaId
+          in: query
+          description: The ID to use for the schema.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Schema'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Schema'
+components:
+  schemas:
+    Topic:
+      type: object
+      properties:
+        name:
+          type: string
+          description: >-
+            The name of the topic (e.g.,
+            projects/my-project/topics/my-topic).
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+        messageStoragePolicy:
+          type: object
+          properties:
+            allowedPersistenceRegions:
+              type: array
+              items:
+                type: string
+        kmsKeyName:
+          type: string
+          description: >-
+            The resource name of the Cloud KMS key to use for message
+            encryption.
+        schemaSettings:
+          type: object
+          properties:
+            schema:
+              type: string
+            encoding:
+              type: string
+              enum:
+                - ENCODING_UNSPECIFIED
+                - JSON
+                - BINARY
+            firstRevisionId:
+              type: string
+            lastRevisionId:
+              type: string
+        satisfiesPzs:
+          type: boolean
+        messageRetentionDuration:
+          type: string
+          description: Message retention duration (e.g., 604800s for 7 days).
+        state:
+          type: string
+          enum:
+            - STATE_UNSPECIFIED
+            - ACTIVE
+            - INGESTION_RESOURCE_ERROR
+    Subscription:
+      type: object
+      properties:
+        name:
+          type: string
+        topic:
+          type: string
+        pushConfig:
+          $ref: '#/components/schemas/PushConfig'
+        bigqueryConfig:
+          type: object
+          properties:
+            table:
+              type: string
+            useTopicSchema:
+              type: boolean
+            writeMetadata:
+              type: boolean
+            dropUnknownFields:
+              type: boolean
+        cloudStorageConfig:
+          type: object
+          properties:
+            bucket:
+              type: string
+            filenamePrefix:
+              type: string
+            filenameSuffix:
+              type: string
+            maxDuration:
+              type: string
+            maxBytes:
+              type: string
+              format: int64
+        ackDeadlineSeconds:
+          type: integer
+        retainAckedMessages:
+          type: boolean
+        messageRetentionDuration:
+          type: string
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+        enableMessageOrdering:
+          type: boolean
+        expirationPolicy:
+          type: object
+          properties:
+            ttl:
+              type: string
+        filter:
+          type: string
+        deadLetterPolicy:
+          type: object
+          properties:
+            deadLetterTopic:
+              type: string
+            maxDeliveryAttempts:
+              type: integer
+        retryPolicy:
+          type: object
+          properties:
+            minimumBackoff:
+              type: string
+            maximumBackoff:
+              type: string
+        detached:
+          type: boolean
+        enableExactlyOnceDelivery:
+          type: boolean
+        state:
+          type: string
+          enum:
+            - STATE_UNSPECIFIED
+            - ACTIVE
+            - RESOURCE_ERROR
+    PushConfig:
+      type: object
+      properties:
+        pushEndpoint:
+          type: string
+        attributes:
+          type: object
+          additionalProperties:
+            type: string
+        oidcToken:
+          type: object
+          properties:
+            serviceAccountEmail:
+              type: string
+            audience:
+              type: string
+        noWrapper:
+          type: object
+          properties:
+            writeMetadata:
+              type: boolean
+    PubsubMessage:
+      type: object
+      properties:
+        data:
+          type: string
+          format: byte
+          description: The message data (base64-encoded).
+        attributes:
+          type: object
+          additionalProperties:
+            type: string
+        messageId:
+          type: string
+        publishTime:
+          type: string
+          format: date-time
+        orderingKey:
+          type: string
+    PublishRequest:
+      type: object
+      required:
+        - messages
+      properties:
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/PubsubMessage'
+    PublishResponse:
+      type: object
+      properties:
+        messageIds:
+          type: array
+          items:
+            type: string
+    PullRequest:
+      type: object
+      required:
+        - maxMessages
+      properties:
+        maxMessages:
+          type: integer
+          description: Maximum number of messages to return.
+    PullResponse:
+      type: object
+      properties:
+        receivedMessages:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReceivedMessage'
+    ReceivedMessage:
+      type: object
+      properties:
+        ackId:
+          type: string
+        message:
+          $ref: '#/components/schemas/PubsubMessage'
+        deliveryAttempt:
+          type: integer
+    Snapshot:
+      type: object
+      properties:
+        name:
+          type: string
+        topic:
+          type: string
+        expireTime:
+          type: string
+          format: date-time
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+    Schema:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+          enum:
+            - TYPE_UNSPECIFIED
+            - PROTOCOL_BUFFER
+            - AVRO
+        definition:
+          type: string
+        revisionId:
+          type: string
+        revisionCreateTime:
+          type: string
+          format: date-time
+    ListTopicsResponse:
+      type: object
+      properties:
+        topics:
+          type: array
+          items:
+            $ref: '#/components/schemas/Topic'
+        nextPageToken:
+          type: string
+    ListSubscriptionsResponse:
+      type: object
+      properties:
+        subscriptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Subscription'
+        nextPageToken:
+          type: string
+    ListSnapshotsResponse:
+      type: object
+      properties:
+        snapshots:
+          type: array
+          items:
+            $ref: '#/components/schemas/Snapshot'
+        nextPageToken:
+          type: string
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          tokenUrl: https://oauth2.googleapis.com/token
+          scopes:
+            https://www.googleapis.com/auth/pubsub: Manage Pub/Sub resources
+            https://www.googleapis.com/auth/cloud-platform: Full access to Google Cloud
+    bearerAuth:
+      type: http
+      scheme: bearer
+security:
+  - oauth2:
+      - https://www.googleapis.com/auth/pubsub
+  - bearerAuth: []
+tags:
+  - name: Topics
+    description: Manage Pub/Sub topics
+  - name: Publish
+    description: Publish messages to topics
+  - name: Subscriptions
+    description: Manage Pub/Sub subscriptions
+  - name: Subscribe
+    description: Pull and acknowledge messages
+  - name: Snapshots
+    description: Manage subscription snapshots
+  - name: Schemas
+    description: Manage Pub/Sub schemas
