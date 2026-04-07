@@ -8,12 +8,12 @@ description: >-
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - Messaging
-  - Pub/Sub
+  - Cloud
   - Event-Driven
   - Google Cloud
+  - Messaging
+  - Pub/Sub
   - Streaming
-  - Cloud
 url: >-
   https://raw.githubusercontent.com/api-evangelist/google-pub-sub/refs/heads/main/apis.yml
 created: '2026-03-26'
@@ -29,12 +29,12 @@ apis:
       Cloud Platform.
     humanURL: https://cloud.google.com/pubsub
     tags:
-      - Messaging
-      - Pub/Sub
+      - Cloud
       - Event-Driven
       - Google Cloud
+      - Messaging
+      - Pub/Sub
       - Streaming
-      - Cloud
     properties:
       - type: OpenAPI
         url: >-

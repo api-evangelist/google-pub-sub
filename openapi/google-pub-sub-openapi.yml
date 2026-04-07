@@ -851,15 +851,15 @@ security:
       - https://www.googleapis.com/auth/pubsub
   - bearerAuth: []
 tags:
-  - name: Topics
-    description: Manage Pub/Sub topics
   - name: Publish
     description: Publish messages to topics
-  - name: Subscriptions
-    description: Manage Pub/Sub subscriptions
-  - name: Subscribe
-    description: Pull and acknowledge messages
-  - name: Snapshots
-    description: Manage subscription snapshots
   - name: Schemas
     description: Manage Pub/Sub schemas
+  - name: Snapshots
+    description: Manage subscription snapshots
+  - name: Subscribe
+    description: Pull and acknowledge messages
+  - name: Subscriptions
+    description: Manage Pub/Sub subscriptions
+  - name: Topics
+    description: Manage Pub/Sub topics
