@@ -1,0 +1,1032 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Google Pub/Sub Google Cloud Pub/Sub API
+  description: Provides reliable, many-to-many, asynchronous messaging between applications. The Pub/Sub API allows you to
+    create and manage topics and subscriptions, publish messages, and pull or push messages to subscribers.
+  tags:
+  - Google
+  - Pub
+  - Sub
+  - API
+  created: '2026-05-06'
+  modified: '2026-05-06'
+capability:
+  consumes:
+  - type: http
+    namespace: google-pub-sub
+    baseUri: https://pubsub.googleapis.com
+    description: Google Pub/Sub Google Cloud Pub/Sub API HTTP API.
+    authentication:
+      type: bearer
+      token: '{{GOOGLE_PUB_SUB_TOKEN}}'
+    resources:
+    - name: v1-projects-project-topics
+      path: /v1/projects/{project}/topics
+      operations:
+      - name: listtopics
+        method: GET
+        description: Google Pub/Sub List topics
+        inputParameters:
+        - name: project
+          in: path
+          type: string
+          required: true
+          description: The project ID (e.g., projects/my-project).
+        - name: pageSize
+          in: query
+          type: integer
+          description: Maximum number of topics to return.
+        - name: pageToken
+          in: query
+          type: string
+          description: Token for pagination.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-projects-project-topics-topic
+      path: /v1/projects/{project}/topics/{topic}
+      operations:
+      - name: gettopic
+        method: GET
+        description: Google Pub/Sub Get a topic
+        inputParameters:
+        - name: project
+          in: path
+          type: string
+          required: true
+        - name: topic
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createtopic
+        method: PUT
+        description: Google Pub/Sub Create a topic
+        inputParameters:
+        - name: project
+          in: path
+          type: string
+          required: true
+        - name: topic
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deletetopic
+        method: DELETE
+        description: Google Pub/Sub Delete a topic
+        inputParameters:
+        - name: project
+          in: path
+          type: string
+          required: true
+        - name: topic
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-topic
+      path: /v1/{topic}
+      operations:
+      - name: updatetopic
+        method: PATCH
+        description: Google Pub/Sub Update a topic
+        inputParameters:
+        - name: topic
+          in: path
+          type: string
+          required: true
+          description: The name of the topic (e.g., projects/my-project/topics/my-topic).
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-topic-publish
+      path: /v1/{topic}:publish
+      operations:
+      - name: publish
+        method: POST
+        description: Google Pub/Sub Publish messages
+        inputParameters:
+        - name: topic
+          in: path
+          type: string
+          required: true
+          description: The topic name (e.g., projects/my-project/topics/my-topic).
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-projects-project-subscriptions
+      path: /v1/projects/{project}/subscriptions
+      operations:
+      - name: listsubscriptions
+        method: GET
+        description: Google Pub/Sub List subscriptions
+        inputParameters:
+        - name: project
+          in: path
+          type: string
+          required: true
+        - name: pageSize
+          in: query
+          type: integer
+        - name: pageToken
+          in: query
+          type: string
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-projects-project-subscriptions-subscription
+      path: /v1/projects/{project}/subscriptions/{subscription}
+      operations:
+      - name: getsubscription
+        method: GET
+        description: Google Pub/Sub Get a subscription
+        inputParameters:
+        - name: project
+          in: path
+          type: string
+          required: true
+        - name: subscription
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createsubscription
+        method: PUT
+        description: Google Pub/Sub Create a subscription
+        inputParameters:
+        - name: project
+          in: path
+          type: string
+          required: true
+        - name: subscription
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deletesubscription
+        method: DELETE
+        description: Google Pub/Sub Delete a subscription
+        inputParameters:
+        - name: project
+          in: path
+          type: string
+          required: true
+        - name: subscription
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-subscription-pull
+      path: /v1/{subscription}:pull
+      operations:
+      - name: pull
+        method: POST
+        description: Google Pub/Sub Pull messages
+        inputParameters:
+        - name: subscription
+          in: path
+          type: string
+          required: true
+          description: The subscription name.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-subscription-acknowledge
+      path: /v1/{subscription}:acknowledge
+      operations:
+      - name: acknowledge
+        method: POST
+        description: Google Pub/Sub Acknowledge messages
+        inputParameters:
+        - name: subscription
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-subscription-modifyackdeadline
+      path: /v1/{subscription}:modifyAckDeadline
+      operations:
+      - name: modifyackdeadline
+        method: POST
+        description: Google Pub/Sub Modify acknowledgement deadline
+        inputParameters:
+        - name: subscription
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-projects-project-snapshots
+      path: /v1/projects/{project}/snapshots
+      operations:
+      - name: listsnapshots
+        method: GET
+        description: Google Pub/Sub List snapshots
+        inputParameters:
+        - name: project
+          in: path
+          type: string
+          required: true
+        - name: pageSize
+          in: query
+          type: integer
+        - name: pageToken
+          in: query
+          type: string
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-projects-project-snapshots-snapshot
+      path: /v1/projects/{project}/snapshots/{snapshot}
+      operations:
+      - name: getsnapshot
+        method: GET
+        description: Google Pub/Sub Get a snapshot
+        inputParameters:
+        - name: project
+          in: path
+          type: string
+          required: true
+        - name: snapshot
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createsnapshot
+        method: PUT
+        description: Google Pub/Sub Create a snapshot
+        inputParameters:
+        - name: project
+          in: path
+          type: string
+          required: true
+        - name: snapshot
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deletesnapshot
+        method: DELETE
+        description: Google Pub/Sub Delete a snapshot
+        inputParameters:
+        - name: project
+          in: path
+          type: string
+          required: true
+        - name: snapshot
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-projects-project-schemas
+      path: /v1/projects/{project}/schemas
+      operations:
+      - name: listschemas
+        method: GET
+        description: Google Pub/Sub List schemas
+        inputParameters:
+        - name: project
+          in: path
+          type: string
+          required: true
+        - name: pageSize
+          in: query
+          type: integer
+        - name: pageToken
+          in: query
+          type: string
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createschema
+        method: POST
+        description: Google Pub/Sub Create a schema
+        inputParameters:
+        - name: project
+          in: path
+          type: string
+          required: true
+        - name: schemaId
+          in: query
+          type: string
+          description: The ID to use for the schema.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    port: 8080
+    namespace: google-pub-sub-rest
+    description: REST adapter for Google Pub/Sub Google Cloud Pub/Sub API.
+    resources:
+    - path: /v1/projects/{project}/topics
+      name: listtopics
+      operations:
+      - method: GET
+        name: listtopics
+        description: Google Pub/Sub List topics
+        call: google-pub-sub.listtopics
+        with:
+          project: rest.project
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/projects/{project}/topics/{topic}
+      name: gettopic
+      operations:
+      - method: GET
+        name: gettopic
+        description: Google Pub/Sub Get a topic
+        call: google-pub-sub.gettopic
+        with:
+          project: rest.project
+          topic: rest.topic
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/projects/{project}/topics/{topic}
+      name: createtopic
+      operations:
+      - method: PUT
+        name: createtopic
+        description: Google Pub/Sub Create a topic
+        call: google-pub-sub.createtopic
+        with:
+          project: rest.project
+          topic: rest.topic
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/projects/{project}/topics/{topic}
+      name: deletetopic
+      operations:
+      - method: DELETE
+        name: deletetopic
+        description: Google Pub/Sub Delete a topic
+        call: google-pub-sub.deletetopic
+        with:
+          project: rest.project
+          topic: rest.topic
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/{topic}
+      name: updatetopic
+      operations:
+      - method: PATCH
+        name: updatetopic
+        description: Google Pub/Sub Update a topic
+        call: google-pub-sub.updatetopic
+        with:
+          topic: rest.topic
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/{topic}:publish
+      name: publish
+      operations:
+      - method: POST
+        name: publish
+        description: Google Pub/Sub Publish messages
+        call: google-pub-sub.publish
+        with:
+          topic: rest.topic
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/projects/{project}/subscriptions
+      name: listsubscriptions
+      operations:
+      - method: GET
+        name: listsubscriptions
+        description: Google Pub/Sub List subscriptions
+        call: google-pub-sub.listsubscriptions
+        with:
+          project: rest.project
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/projects/{project}/subscriptions/{subscription}
+      name: getsubscription
+      operations:
+      - method: GET
+        name: getsubscription
+        description: Google Pub/Sub Get a subscription
+        call: google-pub-sub.getsubscription
+        with:
+          project: rest.project
+          subscription: rest.subscription
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/projects/{project}/subscriptions/{subscription}
+      name: createsubscription
+      operations:
+      - method: PUT
+        name: createsubscription
+        description: Google Pub/Sub Create a subscription
+        call: google-pub-sub.createsubscription
+        with:
+          project: rest.project
+          subscription: rest.subscription
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/projects/{project}/subscriptions/{subscription}
+      name: deletesubscription
+      operations:
+      - method: DELETE
+        name: deletesubscription
+        description: Google Pub/Sub Delete a subscription
+        call: google-pub-sub.deletesubscription
+        with:
+          project: rest.project
+          subscription: rest.subscription
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/{subscription}:pull
+      name: pull
+      operations:
+      - method: POST
+        name: pull
+        description: Google Pub/Sub Pull messages
+        call: google-pub-sub.pull
+        with:
+          subscription: rest.subscription
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/{subscription}:acknowledge
+      name: acknowledge
+      operations:
+      - method: POST
+        name: acknowledge
+        description: Google Pub/Sub Acknowledge messages
+        call: google-pub-sub.acknowledge
+        with:
+          subscription: rest.subscription
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/{subscription}:modifyAckDeadline
+      name: modifyackdeadline
+      operations:
+      - method: POST
+        name: modifyackdeadline
+        description: Google Pub/Sub Modify acknowledgement deadline
+        call: google-pub-sub.modifyackdeadline
+        with:
+          subscription: rest.subscription
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/projects/{project}/snapshots
+      name: listsnapshots
+      operations:
+      - method: GET
+        name: listsnapshots
+        description: Google Pub/Sub List snapshots
+        call: google-pub-sub.listsnapshots
+        with:
+          project: rest.project
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/projects/{project}/snapshots/{snapshot}
+      name: getsnapshot
+      operations:
+      - method: GET
+        name: getsnapshot
+        description: Google Pub/Sub Get a snapshot
+        call: google-pub-sub.getsnapshot
+        with:
+          project: rest.project
+          snapshot: rest.snapshot
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/projects/{project}/snapshots/{snapshot}
+      name: createsnapshot
+      operations:
+      - method: PUT
+        name: createsnapshot
+        description: Google Pub/Sub Create a snapshot
+        call: google-pub-sub.createsnapshot
+        with:
+          project: rest.project
+          snapshot: rest.snapshot
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/projects/{project}/snapshots/{snapshot}
+      name: deletesnapshot
+      operations:
+      - method: DELETE
+        name: deletesnapshot
+        description: Google Pub/Sub Delete a snapshot
+        call: google-pub-sub.deletesnapshot
+        with:
+          project: rest.project
+          snapshot: rest.snapshot
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/projects/{project}/schemas
+      name: listschemas
+      operations:
+      - method: GET
+        name: listschemas
+        description: Google Pub/Sub List schemas
+        call: google-pub-sub.listschemas
+        with:
+          project: rest.project
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/projects/{project}/schemas
+      name: createschema
+      operations:
+      - method: POST
+        name: createschema
+        description: Google Pub/Sub Create a schema
+        call: google-pub-sub.createschema
+        with:
+          project: rest.project
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: google-pub-sub-mcp
+    transport: http
+    description: MCP adapter for Google Pub/Sub Google Cloud Pub/Sub API for AI agent use.
+    tools:
+    - name: listtopics
+      description: Google Pub/Sub List topics
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: google-pub-sub.listtopics
+      with:
+        project: tools.project
+        pageSize: tools.pageSize
+        pageToken: tools.pageToken
+      inputParameters:
+      - name: project
+        type: string
+        description: The project ID (e.g., projects/my-project).
+        required: true
+      - name: pageSize
+        type: integer
+        description: Maximum number of topics to return.
+      - name: pageToken
+        type: string
+        description: Token for pagination.
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: gettopic
+      description: Google Pub/Sub Get a topic
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: google-pub-sub.gettopic
+      with:
+        project: tools.project
+        topic: tools.topic
+      inputParameters:
+      - name: project
+        type: string
+        description: project
+        required: true
+      - name: topic
+        type: string
+        description: topic
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createtopic
+      description: Google Pub/Sub Create a topic
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: google-pub-sub.createtopic
+      with:
+        project: tools.project
+        topic: tools.topic
+      inputParameters:
+      - name: project
+        type: string
+        description: project
+        required: true
+      - name: topic
+        type: string
+        description: topic
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deletetopic
+      description: Google Pub/Sub Delete a topic
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: google-pub-sub.deletetopic
+      with:
+        project: tools.project
+        topic: tools.topic
+      inputParameters:
+      - name: project
+        type: string
+        description: project
+        required: true
+      - name: topic
+        type: string
+        description: topic
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: updatetopic
+      description: Google Pub/Sub Update a topic
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: google-pub-sub.updatetopic
+      with:
+        topic: tools.topic
+      inputParameters:
+      - name: topic
+        type: string
+        description: The name of the topic (e.g., projects/my-project/topics/my-topic).
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: publish
+      description: Google Pub/Sub Publish messages
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: google-pub-sub.publish
+      with:
+        topic: tools.topic
+      inputParameters:
+      - name: topic
+        type: string
+        description: The topic name (e.g., projects/my-project/topics/my-topic).
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listsubscriptions
+      description: Google Pub/Sub List subscriptions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: google-pub-sub.listsubscriptions
+      with:
+        project: tools.project
+        pageSize: tools.pageSize
+        pageToken: tools.pageToken
+      inputParameters:
+      - name: project
+        type: string
+        description: project
+        required: true
+      - name: pageSize
+        type: integer
+        description: pageSize
+      - name: pageToken
+        type: string
+        description: pageToken
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getsubscription
+      description: Google Pub/Sub Get a subscription
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: google-pub-sub.getsubscription
+      with:
+        project: tools.project
+        subscription: tools.subscription
+      inputParameters:
+      - name: project
+        type: string
+        description: project
+        required: true
+      - name: subscription
+        type: string
+        description: subscription
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createsubscription
+      description: Google Pub/Sub Create a subscription
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: google-pub-sub.createsubscription
+      with:
+        project: tools.project
+        subscription: tools.subscription
+      inputParameters:
+      - name: project
+        type: string
+        description: project
+        required: true
+      - name: subscription
+        type: string
+        description: subscription
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deletesubscription
+      description: Google Pub/Sub Delete a subscription
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: google-pub-sub.deletesubscription
+      with:
+        project: tools.project
+        subscription: tools.subscription
+      inputParameters:
+      - name: project
+        type: string
+        description: project
+        required: true
+      - name: subscription
+        type: string
+        description: subscription
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pull
+      description: Google Pub/Sub Pull messages
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: google-pub-sub.pull
+      with:
+        subscription: tools.subscription
+      inputParameters:
+      - name: subscription
+        type: string
+        description: The subscription name.
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: acknowledge
+      description: Google Pub/Sub Acknowledge messages
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: google-pub-sub.acknowledge
+      with:
+        subscription: tools.subscription
+      inputParameters:
+      - name: subscription
+        type: string
+        description: subscription
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: modifyackdeadline
+      description: Google Pub/Sub Modify acknowledgement deadline
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: google-pub-sub.modifyackdeadline
+      with:
+        subscription: tools.subscription
+      inputParameters:
+      - name: subscription
+        type: string
+        description: subscription
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listsnapshots
+      description: Google Pub/Sub List snapshots
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: google-pub-sub.listsnapshots
+      with:
+        project: tools.project
+        pageSize: tools.pageSize
+        pageToken: tools.pageToken
+      inputParameters:
+      - name: project
+        type: string
+        description: project
+        required: true
+      - name: pageSize
+        type: integer
+        description: pageSize
+      - name: pageToken
+        type: string
+        description: pageToken
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getsnapshot
+      description: Google Pub/Sub Get a snapshot
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: google-pub-sub.getsnapshot
+      with:
+        project: tools.project
+        snapshot: tools.snapshot
+      inputParameters:
+      - name: project
+        type: string
+        description: project
+        required: true
+      - name: snapshot
+        type: string
+        description: snapshot
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createsnapshot
+      description: Google Pub/Sub Create a snapshot
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: google-pub-sub.createsnapshot
+      with:
+        project: tools.project
+        snapshot: tools.snapshot
+      inputParameters:
+      - name: project
+        type: string
+        description: project
+        required: true
+      - name: snapshot
+        type: string
+        description: snapshot
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deletesnapshot
+      description: Google Pub/Sub Delete a snapshot
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: google-pub-sub.deletesnapshot
+      with:
+        project: tools.project
+        snapshot: tools.snapshot
+      inputParameters:
+      - name: project
+        type: string
+        description: project
+        required: true
+      - name: snapshot
+        type: string
+        description: snapshot
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listschemas
+      description: Google Pub/Sub List schemas
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: google-pub-sub.listschemas
+      with:
+        project: tools.project
+        pageSize: tools.pageSize
+        pageToken: tools.pageToken
+      inputParameters:
+      - name: project
+        type: string
+        description: project
+        required: true
+      - name: pageSize
+        type: integer
+        description: pageSize
+      - name: pageToken
+        type: string
+        description: pageToken
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createschema
+      description: Google Pub/Sub Create a schema
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: google-pub-sub.createschema
+      with:
+        project: tools.project
+        schemaId: tools.schemaId
+      inputParameters:
+      - name: project
+        type: string
+        description: project
+        required: true
+      - name: schemaId
+        type: string
+        description: The ID to use for the schema.
+      outputParameters:
+      - type: object
+        mapping: $.
+binds:
+- namespace: env
+  keys:
+    GOOGLE_PUB_SUB_TOKEN: GOOGLE_PUB_SUB_TOKEN
