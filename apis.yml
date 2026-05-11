@@ -61,6 +61,10 @@ common:
     url: https://github.com/googleapis/google-cloud-go
   - type: Blog
     url: https://cloud.google.com/blog
+  - type: Integrations
+    url: https://cloud.google.com/marketplace
+integrations:
+  - name: Become a Partner
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
