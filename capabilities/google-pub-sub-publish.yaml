@@ -1,0 +1,87 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Google Pub/Sub Google Cloud Pub/Sub API — Publish
+  description: 'Google Pub/Sub Google Cloud Pub/Sub API — Publish. 1 operations. Lead operation: Google Pub/Sub Publish messages.
+    Self-contained Naftiko capability covering one Google Pub Sub business surface.'
+  tags:
+  - Google Pub Sub
+  - Publish
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GOOGLE_PUB_SUB_API_KEY: GOOGLE_PUB_SUB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: google-pub-sub-publish
+    baseUri: https://pubsub.googleapis.com
+    description: Google Pub/Sub Google Cloud Pub/Sub API — Publish business capability. Self-contained, no shared references.
+    resources:
+    - name: v1-topic}:publish
+      path: /v1/{topic}:publish
+      operations:
+      - name: publish
+        method: POST
+        description: Google Pub/Sub Publish messages
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: topic
+          in: path
+          type: string
+          description: The topic name (e.g., projects/my-project/topics/my-topic).
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.GOOGLE_PUB_SUB_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: google-pub-sub-publish-rest
+    port: 8080
+    description: REST adapter for Google Pub/Sub Google Cloud Pub/Sub API — Publish. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/v1/topic-publish
+      name: v1-topic-publish
+      description: REST surface for v1-topic}:publish.
+      operations:
+      - method: POST
+        name: publish
+        description: Google Pub/Sub Publish messages
+        call: google-pub-sub-publish.publish
+        with:
+          topic: rest.topic
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: google-pub-sub-publish-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Google Pub/Sub Google Cloud Pub/Sub API — Publish. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: google-pub-sub-publish-messages
+      description: Google Pub/Sub Publish messages
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: google-pub-sub-publish.publish
+      with:
+        topic: tools.topic
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

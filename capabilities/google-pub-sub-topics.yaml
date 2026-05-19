@@ -1,0 +1,275 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Google Pub/Sub Google Cloud Pub/Sub API — Topics
+  description: 'Google Pub/Sub Google Cloud Pub/Sub API — Topics. 5 operations. Lead operation: Google Pub/Sub List topics.
+    Self-contained Naftiko capability covering one Google Pub Sub business surface.'
+  tags:
+  - Google Pub Sub
+  - Topics
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GOOGLE_PUB_SUB_API_KEY: GOOGLE_PUB_SUB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: google-pub-sub-topics
+    baseUri: https://pubsub.googleapis.com
+    description: Google Pub/Sub Google Cloud Pub/Sub API — Topics business capability. Self-contained, no shared references.
+    resources:
+    - name: v1-projects-project-topics
+      path: /v1/projects/{project}/topics
+      operations:
+      - name: listtopics
+        method: GET
+        description: Google Pub/Sub List topics
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: project
+          in: path
+          type: string
+          description: The project ID (e.g., projects/my-project).
+          required: true
+        - name: pageSize
+          in: query
+          type: integer
+          description: Maximum number of topics to return.
+        - name: pageToken
+          in: query
+          type: string
+          description: Token for pagination.
+    - name: v1-projects-project-topics-topic
+      path: /v1/projects/{project}/topics/{topic}
+      operations:
+      - name: gettopic
+        method: GET
+        description: Google Pub/Sub Get a topic
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: project
+          in: path
+          type: string
+          required: true
+        - name: topic
+          in: path
+          type: string
+          required: true
+      - name: createtopic
+        method: PUT
+        description: Google Pub/Sub Create a topic
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: project
+          in: path
+          type: string
+          required: true
+        - name: topic
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+      - name: deletetopic
+        method: DELETE
+        description: Google Pub/Sub Delete a topic
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: project
+          in: path
+          type: string
+          required: true
+        - name: topic
+          in: path
+          type: string
+          required: true
+    - name: v1-topic
+      path: /v1/{topic}
+      operations:
+      - name: updatetopic
+        method: PATCH
+        description: Google Pub/Sub Update a topic
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: topic
+          in: path
+          type: string
+          description: The name of the topic (e.g., projects/my-project/topics/my-topic).
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    authentication:
+      type: bearer
+      token: '{{env.GOOGLE_PUB_SUB_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: google-pub-sub-topics-rest
+    port: 8080
+    description: REST adapter for Google Pub/Sub Google Cloud Pub/Sub API — Topics. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/v1/projects/{project}/topics
+      name: v1-projects-project-topics
+      description: REST surface for v1-projects-project-topics.
+      operations:
+      - method: GET
+        name: listtopics
+        description: Google Pub/Sub List topics
+        call: google-pub-sub-topics.listtopics
+        with:
+          project: rest.project
+          pageSize: rest.pageSize
+          pageToken: rest.pageToken
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/projects/{project}/topics/{topic}
+      name: v1-projects-project-topics-topic
+      description: REST surface for v1-projects-project-topics-topic.
+      operations:
+      - method: GET
+        name: gettopic
+        description: Google Pub/Sub Get a topic
+        call: google-pub-sub-topics.gettopic
+        with:
+          project: rest.project
+          topic: rest.topic
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: createtopic
+        description: Google Pub/Sub Create a topic
+        call: google-pub-sub-topics.createtopic
+        with:
+          project: rest.project
+          topic: rest.topic
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletetopic
+        description: Google Pub/Sub Delete a topic
+        call: google-pub-sub-topics.deletetopic
+        with:
+          project: rest.project
+          topic: rest.topic
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/{topic}
+      name: v1-topic
+      description: REST surface for v1-topic.
+      operations:
+      - method: PATCH
+        name: updatetopic
+        description: Google Pub/Sub Update a topic
+        call: google-pub-sub-topics.updatetopic
+        with:
+          topic: rest.topic
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: google-pub-sub-topics-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Google Pub/Sub Google Cloud Pub/Sub API — Topics. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: google-pub-sub-list-topics
+      description: Google Pub/Sub List topics
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: google-pub-sub-topics.listtopics
+      with:
+        project: tools.project
+        pageSize: tools.pageSize
+        pageToken: tools.pageToken
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: google-pub-sub-get-topic
+      description: Google Pub/Sub Get a topic
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: google-pub-sub-topics.gettopic
+      with:
+        project: tools.project
+        topic: tools.topic
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: google-pub-sub-create-topic
+      description: Google Pub/Sub Create a topic
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: google-pub-sub-topics.createtopic
+      with:
+        project: tools.project
+        topic: tools.topic
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: google-pub-sub-delete-topic
+      description: Google Pub/Sub Delete a topic
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: google-pub-sub-topics.deletetopic
+      with:
+        project: tools.project
+        topic: tools.topic
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: google-pub-sub-update-topic
+      description: Google Pub/Sub Update a topic
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: google-pub-sub-topics.updatetopic
+      with:
+        topic: tools.topic
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

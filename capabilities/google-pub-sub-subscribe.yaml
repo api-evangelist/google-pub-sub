@@ -1,0 +1,183 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Google Pub/Sub Google Cloud Pub/Sub API — Subscribe
+  description: 'Google Pub/Sub Google Cloud Pub/Sub API — Subscribe. 3 operations. Lead operation: Google Pub/Sub Acknowledge
+    messages. Self-contained Naftiko capability covering one Google Pub Sub business surface.'
+  tags:
+  - Google Pub Sub
+  - Subscribe
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GOOGLE_PUB_SUB_API_KEY: GOOGLE_PUB_SUB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: google-pub-sub-subscribe
+    baseUri: https://pubsub.googleapis.com
+    description: Google Pub/Sub Google Cloud Pub/Sub API — Subscribe business capability. Self-contained, no shared references.
+    resources:
+    - name: v1-subscription}:acknowledge
+      path: /v1/{subscription}:acknowledge
+      operations:
+      - name: acknowledge
+        method: POST
+        description: Google Pub/Sub Acknowledge messages
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: subscription
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v1-subscription}:modifyAckDeadline
+      path: /v1/{subscription}:modifyAckDeadline
+      operations:
+      - name: modifyackdeadline
+        method: POST
+        description: Google Pub/Sub Modify acknowledgement deadline
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: subscription
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v1-subscription}:pull
+      path: /v1/{subscription}:pull
+      operations:
+      - name: pull
+        method: POST
+        description: Google Pub/Sub Pull messages
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: subscription
+          in: path
+          type: string
+          description: The subscription name.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.GOOGLE_PUB_SUB_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: google-pub-sub-subscribe-rest
+    port: 8080
+    description: REST adapter for Google Pub/Sub Google Cloud Pub/Sub API — Subscribe. One Spectral-compliant resource per
+      consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/v1/subscription-acknowledge
+      name: v1-subscription-acknowledge
+      description: REST surface for v1-subscription}:acknowledge.
+      operations:
+      - method: POST
+        name: acknowledge
+        description: Google Pub/Sub Acknowledge messages
+        call: google-pub-sub-subscribe.acknowledge
+        with:
+          subscription: rest.subscription
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/subscription-modifyackdeadline
+      name: v1-subscription-modifyackdeadline
+      description: REST surface for v1-subscription}:modifyAckDeadline.
+      operations:
+      - method: POST
+        name: modifyackdeadline
+        description: Google Pub/Sub Modify acknowledgement deadline
+        call: google-pub-sub-subscribe.modifyackdeadline
+        with:
+          subscription: rest.subscription
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/subscription-pull
+      name: v1-subscription-pull
+      description: REST surface for v1-subscription}:pull.
+      operations:
+      - method: POST
+        name: pull
+        description: Google Pub/Sub Pull messages
+        call: google-pub-sub-subscribe.pull
+        with:
+          subscription: rest.subscription
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: google-pub-sub-subscribe-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Google Pub/Sub Google Cloud Pub/Sub API — Subscribe. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: google-pub-sub-acknowledge-messages
+      description: Google Pub/Sub Acknowledge messages
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: google-pub-sub-subscribe.acknowledge
+      with:
+        subscription: tools.subscription
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: google-pub-sub-modify-acknowledgement
+      description: Google Pub/Sub Modify acknowledgement deadline
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: google-pub-sub-subscribe.modifyackdeadline
+      with:
+        subscription: tools.subscription
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: google-pub-sub-pull-messages
+      description: Google Pub/Sub Pull messages
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: google-pub-sub-subscribe.pull
+      with:
+        subscription: tools.subscription
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
