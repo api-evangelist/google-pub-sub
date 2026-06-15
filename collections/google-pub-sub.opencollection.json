@@ -1,0 +1,545 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Google Pub/Sub Google Cloud Pub/Sub API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "accessTokenUrl": "https://oauth2.googleapis.com/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Topics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Google Pub/Sub List topics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://pubsub.googleapis.com/v1/projects/:project/topics",
+            "params": [
+              {
+                "name": "project",
+                "value": "",
+                "type": "path",
+                "description": "The project ID (e.g., projects/my-project)."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of topics to return."
+              },
+              {
+                "name": "pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Token for pagination."
+              }
+            ]
+          },
+          "docs": "Lists matching topics in the given project."
+        },
+        {
+          "info": {
+            "name": "Google Pub/Sub Get a topic",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://pubsub.googleapis.com/v1/projects/:project/topics/:topic",
+            "params": [
+              {
+                "name": "project",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "topic",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Gets the configuration of a topic."
+        },
+        {
+          "info": {
+            "name": "Google Pub/Sub Create a topic",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://pubsub.googleapis.com/v1/projects/:project/topics/:topic",
+            "params": [
+              {
+                "name": "project",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "topic",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates the given topic with the given name. The topic name must be unique within the project."
+        },
+        {
+          "info": {
+            "name": "Google Pub/Sub Delete a topic",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://pubsub.googleapis.com/v1/projects/:project/topics/:topic",
+            "params": [
+              {
+                "name": "project",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "topic",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes the topic with the given name. Existing subscriptions to this topic are not deleted but their topic field is set to _deleted-topic_."
+        },
+        {
+          "info": {
+            "name": "Google Pub/Sub Update a topic",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://pubsub.googleapis.com/v1/:topic",
+            "params": [
+              {
+                "name": "topic",
+                "value": "",
+                "type": "path",
+                "description": "The name of the topic (e.g., projects/my-project/topics/my-topic)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing topic by updating the fields specified in the update mask."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Publish",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Google Pub/Sub Publish messages",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://pubsub.googleapis.com/v1/:topic:publish",
+            "params": [
+              {
+                "name": "topic",
+                "value": "",
+                "type": "path",
+                "description": "The topic name (e.g., projects/my-project/topics/my-topic)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds one or more messages to the topic. Returns NOT_FOUND if the topic does not exist."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Subscriptions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Google Pub/Sub List subscriptions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://pubsub.googleapis.com/v1/projects/:project/subscriptions",
+            "params": [
+              {
+                "name": "project",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageToken",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lists matching subscriptions in the given project."
+        },
+        {
+          "info": {
+            "name": "Google Pub/Sub Get a subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://pubsub.googleapis.com/v1/projects/:project/subscriptions/:subscription",
+            "params": [
+              {
+                "name": "project",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "subscription",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Gets the configuration details of a subscription."
+        },
+        {
+          "info": {
+            "name": "Google Pub/Sub Create a subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://pubsub.googleapis.com/v1/projects/:project/subscriptions/:subscription",
+            "params": [
+              {
+                "name": "project",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "subscription",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a subscription to a given topic. If the subscription already exists, returns ALREADY_EXISTS."
+        },
+        {
+          "info": {
+            "name": "Google Pub/Sub Delete a subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://pubsub.googleapis.com/v1/projects/:project/subscriptions/:subscription",
+            "params": [
+              {
+                "name": "project",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "subscription",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes an existing subscription."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Subscribe",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Google Pub/Sub Pull messages",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://pubsub.googleapis.com/v1/:subscription:pull",
+            "params": [
+              {
+                "name": "subscription",
+                "value": "",
+                "type": "path",
+                "description": "The subscription name."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Pulls messages from the server. The server may return UNAVAILABLE if there are too many concurrent pull requests pending for the given subscription."
+        },
+        {
+          "info": {
+            "name": "Google Pub/Sub Acknowledge messages",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://pubsub.googleapis.com/v1/:subscription:acknowledge",
+            "params": [
+              {
+                "name": "subscription",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Acknowledges the messages associated with the ack_ids in the AcknowledgeRequest. The Pub/Sub system can remove the relevant messages from the subscription."
+        },
+        {
+          "info": {
+            "name": "Google Pub/Sub Modify acknowledgement deadline",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://pubsub.googleapis.com/v1/:subscription:modifyAckDeadline",
+            "params": [
+              {
+                "name": "subscription",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modifies the ack deadline for a specific message. Useful to indicate that more time is needed to process a message."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Snapshots",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Google Pub/Sub List snapshots",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://pubsub.googleapis.com/v1/projects/:project/snapshots",
+            "params": [
+              {
+                "name": "project",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageToken",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lists the existing snapshots in the given project."
+        },
+        {
+          "info": {
+            "name": "Google Pub/Sub Get a snapshot",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://pubsub.googleapis.com/v1/projects/:project/snapshots/:snapshot",
+            "params": [
+              {
+                "name": "project",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "snapshot",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Gets the configuration details of a snapshot."
+        },
+        {
+          "info": {
+            "name": "Google Pub/Sub Create a snapshot",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://pubsub.googleapis.com/v1/projects/:project/snapshots/:snapshot",
+            "params": [
+              {
+                "name": "project",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "snapshot",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a snapshot from the requested subscription. Snapshots are used for the seek operation."
+        },
+        {
+          "info": {
+            "name": "Google Pub/Sub Delete a snapshot",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://pubsub.googleapis.com/v1/projects/:project/snapshots/:snapshot",
+            "params": [
+              {
+                "name": "project",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "snapshot",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Removes an existing snapshot."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Schemas",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Google Pub/Sub List schemas",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://pubsub.googleapis.com/v1/projects/:project/schemas",
+            "params": [
+              {
+                "name": "project",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageToken",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lists schemas in a project."
+        },
+        {
+          "info": {
+            "name": "Google Pub/Sub Create a schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://pubsub.googleapis.com/v1/projects/:project/schemas",
+            "params": [
+              {
+                "name": "project",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "schemaId",
+                "value": "",
+                "type": "query",
+                "description": "The ID to use for the schema."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a schema."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
