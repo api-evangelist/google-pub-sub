@@ -46,6 +46,12 @@ apis:
         url: >-
           https://raw.githubusercontent.com/api-evangelist/google-pub-sub/refs/heads/main/json-schema/google-pub-sub-message.yml
 common:
+  - type: VulnerabilityDisclosure
+    url: security/google-pub-sub-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/google-pub-sub-domain-security.yml
+  - type: Authentication
+    url: authentication/google-pub-sub-authentication.yml
   - type: OAuthScopes
     url: scopes/google-pub-sub-scopes.yml
   - type: Website

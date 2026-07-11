@@ -1,0 +1,24 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/google-pub-sub-openapi.yml
+summary:
+  types:
+  - http
+  - oauth2
+  oauth2_flows:
+  - authorizationCode
+schemes:
+- name: oauth2
+  type: oauth2
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://accounts.google.com/o/oauth2/auth
+    tokenUrl: https://oauth2.googleapis.com/token
+    scopes: 2
+  sources:
+  - openapi/google-pub-sub-openapi.yml
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  sources:
+  - openapi/google-pub-sub-openapi.yml
