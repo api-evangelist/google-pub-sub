@@ -46,6 +46,8 @@ apis:
         url: >-
           https://raw.githubusercontent.com/api-evangelist/google-pub-sub/refs/heads/main/json-schema/google-pub-sub-message.yml
 common:
+  - type: OAuthScopes
+    url: scopes/google-pub-sub-scopes.yml
   - type: Website
     url: https://cloud.google.com/pubsub
   - type: Documentation
