@@ -46,6 +46,8 @@ apis:
         url: >-
           https://raw.githubusercontent.com/api-evangelist/google-pub-sub/refs/heads/main/json-schema/google-pub-sub-message.yml
 common:
+  - type: AgenticAccess
+    url: agentic-access/google-pub-sub-agentic-access.yml
   - type: VulnerabilityDisclosure
     url: security/google-pub-sub-vulnerability-disclosure.yml
   - type: DomainSecurity

@@ -1,0 +1,316 @@
+generated: '2026-07-15'
+method: generated
+source: openapi/google-pub-sub-openapi.yml
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 19
+  by_action_class:
+    connected: 7
+    acting: 12
+  by_consequence:
+    read: 7
+    write: 12
+  human_in_the_loop_required: 0
+operations:
+- path: /v1/projects/{project}/topics
+  method: get
+  operationId: listTopics
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - https://www.googleapis.com/auth/pubsub
+- path: /v1/projects/{project}/topics/{topic}
+  method: get
+  operationId: getTopic
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - https://www.googleapis.com/auth/pubsub
+- path: /v1/projects/{project}/topics/{topic}
+  method: put
+  operationId: createTopic
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - https://www.googleapis.com/auth/pubsub
+- path: /v1/projects/{project}/topics/{topic}
+  method: delete
+  operationId: deleteTopic
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - https://www.googleapis.com/auth/pubsub
+- path: /v1/{topic}
+  method: patch
+  operationId: updateTopic
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - https://www.googleapis.com/auth/pubsub
+- path: /v1/{topic}:publish
+  method: post
+  operationId: publish
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - https://www.googleapis.com/auth/pubsub
+- path: /v1/projects/{project}/subscriptions
+  method: get
+  operationId: listSubscriptions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - https://www.googleapis.com/auth/pubsub
+- path: /v1/projects/{project}/subscriptions/{subscription}
+  method: get
+  operationId: getSubscription
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - https://www.googleapis.com/auth/pubsub
+- path: /v1/projects/{project}/subscriptions/{subscription}
+  method: put
+  operationId: createSubscription
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - https://www.googleapis.com/auth/pubsub
+- path: /v1/projects/{project}/subscriptions/{subscription}
+  method: delete
+  operationId: deleteSubscription
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - https://www.googleapis.com/auth/pubsub
+- path: /v1/{subscription}:pull
+  method: post
+  operationId: pull
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - https://www.googleapis.com/auth/pubsub
+- path: /v1/{subscription}:acknowledge
+  method: post
+  operationId: acknowledge
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - https://www.googleapis.com/auth/pubsub
+- path: /v1/{subscription}:modifyAckDeadline
+  method: post
+  operationId: modifyAckDeadline
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - https://www.googleapis.com/auth/pubsub
+- path: /v1/projects/{project}/snapshots
+  method: get
+  operationId: listSnapshots
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - https://www.googleapis.com/auth/pubsub
+- path: /v1/projects/{project}/snapshots/{snapshot}
+  method: get
+  operationId: getSnapshot
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - https://www.googleapis.com/auth/pubsub
+- path: /v1/projects/{project}/snapshots/{snapshot}
+  method: put
+  operationId: createSnapshot
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - https://www.googleapis.com/auth/pubsub
+- path: /v1/projects/{project}/snapshots/{snapshot}
+  method: delete
+  operationId: deleteSnapshot
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - https://www.googleapis.com/auth/pubsub
+- path: /v1/projects/{project}/schemas
+  method: get
+  operationId: listSchemas
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - https://www.googleapis.com/auth/pubsub
+- path: /v1/projects/{project}/schemas
+  method: post
+  operationId: createSchema
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - https://www.googleapis.com/auth/pubsub
