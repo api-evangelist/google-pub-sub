@@ -1,0 +1,229 @@
+openapi: 3.1.0
+info:
+  title: Google Pub/Sub Google Cloud Pub/Sub Publish Topics API
+  description: Provides reliable, many-to-many, asynchronous messaging between applications. The Pub/Sub API allows you to create and manage topics and subscriptions, publish messages, and pull or push messages to subscribers.
+  version: v1
+  contact:
+    name: Google Cloud
+    url: https://cloud.google.com/pubsub
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: https://pubsub.googleapis.com
+  description: Google Cloud Pub/Sub API
+security:
+- oauth2:
+  - https://www.googleapis.com/auth/pubsub
+- bearerAuth: []
+tags:
+- name: Topics
+  description: Manage Pub/Sub topics
+paths:
+  /v1/projects/{project}/topics:
+    get:
+      operationId: listTopics
+      summary: Google Pub/Sub List topics
+      description: Lists matching topics in the given project.
+      tags:
+      - Topics
+      parameters:
+      - name: project
+        in: path
+        required: true
+        description: The project ID (e.g., projects/my-project).
+        schema:
+          type: string
+      - name: pageSize
+        in: query
+        description: Maximum number of topics to return.
+        schema:
+          type: integer
+      - name: pageToken
+        in: query
+        description: Token for pagination.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTopicsResponse'
+  /v1/projects/{project}/topics/{topic}:
+    get:
+      operationId: getTopic
+      summary: Google Pub/Sub Get a topic
+      description: Gets the configuration of a topic.
+      tags:
+      - Topics
+      parameters:
+      - name: project
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: topic
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Topic'
+    put:
+      operationId: createTopic
+      summary: Google Pub/Sub Create a topic
+      description: Creates the given topic with the given name. The topic name must be unique within the project.
+      tags:
+      - Topics
+      parameters:
+      - name: project
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: topic
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Topic'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Topic'
+    delete:
+      operationId: deleteTopic
+      summary: Google Pub/Sub Delete a topic
+      description: Deletes the topic with the given name. Existing subscriptions to this topic are not deleted but their topic field is set to _deleted-topic_.
+      tags:
+      - Topics
+      parameters:
+      - name: project
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: topic
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+  /v1/{topic}:
+    patch:
+      operationId: updateTopic
+      summary: Google Pub/Sub Update a topic
+      description: Updates an existing topic by updating the fields specified in the update mask.
+      tags:
+      - Topics
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        description: The name of the topic (e.g., projects/my-project/topics/my-topic).
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                topic:
+                  $ref: '#/components/schemas/Topic'
+                updateMask:
+                  type: string
+                  description: Fields to update.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Topic'
+components:
+  schemas:
+    Topic:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the topic (e.g., projects/my-project/topics/my-topic).
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+        messageStoragePolicy:
+          type: object
+          properties:
+            allowedPersistenceRegions:
+              type: array
+              items:
+                type: string
+        kmsKeyName:
+          type: string
+          description: The resource name of the Cloud KMS key to use for message encryption.
+        schemaSettings:
+          type: object
+          properties:
+            schema:
+              type: string
+            encoding:
+              type: string
+              enum:
+              - ENCODING_UNSPECIFIED
+              - JSON
+              - BINARY
+            firstRevisionId:
+              type: string
+            lastRevisionId:
+              type: string
+        satisfiesPzs:
+          type: boolean
+        messageRetentionDuration:
+          type: string
+          description: Message retention duration (e.g., 604800s for 7 days).
+        state:
+          type: string
+          enum:
+          - STATE_UNSPECIFIED
+          - ACTIVE
+          - INGESTION_RESOURCE_ERROR
+    ListTopicsResponse:
+      type: object
+      properties:
+        topics:
+          type: array
+          items:
+            $ref: '#/components/schemas/Topic'
+        nextPageToken:
+          type: string
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          tokenUrl: https://oauth2.googleapis.com/token
+          scopes:
+            https://www.googleapis.com/auth/pubsub: Manage Pub/Sub resources
+            https://www.googleapis.com/auth/cloud-platform: Full access to Google Cloud
+    bearerAuth:
+      type: http
+      scheme: bearer

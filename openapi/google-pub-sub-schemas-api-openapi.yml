@@ -1,0 +1,120 @@
+openapi: 3.1.0
+info:
+  title: Google Pub/Sub Google Cloud Pub/Sub Publish Schemas API
+  description: Provides reliable, many-to-many, asynchronous messaging between applications. The Pub/Sub API allows you to create and manage topics and subscriptions, publish messages, and pull or push messages to subscribers.
+  version: v1
+  contact:
+    name: Google Cloud
+    url: https://cloud.google.com/pubsub
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: https://pubsub.googleapis.com
+  description: Google Cloud Pub/Sub API
+security:
+- oauth2:
+  - https://www.googleapis.com/auth/pubsub
+- bearerAuth: []
+tags:
+- name: Schemas
+  description: Manage Pub/Sub schemas
+paths:
+  /v1/projects/{project}/schemas:
+    get:
+      operationId: listSchemas
+      summary: Google Pub/Sub List schemas
+      description: Lists schemas in a project.
+      tags:
+      - Schemas
+      parameters:
+      - name: project
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+      - name: pageToken
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  schemas:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Schema'
+                  nextPageToken:
+                    type: string
+    post:
+      operationId: createSchema
+      summary: Google Pub/Sub Create a schema
+      description: Creates a schema.
+      tags:
+      - Schemas
+      parameters:
+      - name: project
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: schemaId
+        in: query
+        description: The ID to use for the schema.
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Schema'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Schema'
+components:
+  schemas:
+    Schema:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+          enum:
+          - TYPE_UNSPECIFIED
+          - PROTOCOL_BUFFER
+          - AVRO
+        definition:
+          type: string
+        revisionId:
+          type: string
+        revisionCreateTime:
+          type: string
+          format: date-time
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          tokenUrl: https://oauth2.googleapis.com/token
+          scopes:
+            https://www.googleapis.com/auth/pubsub: Manage Pub/Sub resources
+            https://www.googleapis.com/auth/cloud-platform: Full access to Google Cloud
+    bearerAuth:
+      type: http
+      scheme: bearer

@@ -1,0 +1,167 @@
+openapi: 3.1.0
+info:
+  title: Google Pub/Sub Google Cloud Pub/Sub Publish Subscribe API
+  description: Provides reliable, many-to-many, asynchronous messaging between applications. The Pub/Sub API allows you to create and manage topics and subscriptions, publish messages, and pull or push messages to subscribers.
+  version: v1
+  contact:
+    name: Google Cloud
+    url: https://cloud.google.com/pubsub
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: https://pubsub.googleapis.com
+  description: Google Cloud Pub/Sub API
+security:
+- oauth2:
+  - https://www.googleapis.com/auth/pubsub
+- bearerAuth: []
+tags:
+- name: Subscribe
+  description: Pull and acknowledge messages
+paths:
+  /v1/{subscription}:pull:
+    post:
+      operationId: pull
+      summary: Google Pub/Sub Pull messages
+      description: Pulls messages from the server. The server may return UNAVAILABLE if there are too many concurrent pull requests pending for the given subscription.
+      tags:
+      - Subscribe
+      parameters:
+      - name: subscription
+        in: path
+        required: true
+        description: The subscription name.
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PullRequest'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PullResponse'
+  /v1/{subscription}:acknowledge:
+    post:
+      operationId: acknowledge
+      summary: Google Pub/Sub Acknowledge messages
+      description: Acknowledges the messages associated with the ack_ids in the AcknowledgeRequest. The Pub/Sub system can remove the relevant messages from the subscription.
+      tags:
+      - Subscribe
+      parameters:
+      - name: subscription
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - ackIds
+              properties:
+                ackIds:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        '200':
+          description: Successful response
+  /v1/{subscription}:modifyAckDeadline:
+    post:
+      operationId: modifyAckDeadline
+      summary: Google Pub/Sub Modify acknowledgement deadline
+      description: Modifies the ack deadline for a specific message. Useful to indicate that more time is needed to process a message.
+      tags:
+      - Subscribe
+      parameters:
+      - name: subscription
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - ackIds
+              - ackDeadlineSeconds
+              properties:
+                ackIds:
+                  type: array
+                  items:
+                    type: string
+                ackDeadlineSeconds:
+                  type: integer
+      responses:
+        '200':
+          description: Successful response
+components:
+  schemas:
+    PullResponse:
+      type: object
+      properties:
+        receivedMessages:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReceivedMessage'
+    PullRequest:
+      type: object
+      required:
+      - maxMessages
+      properties:
+        maxMessages:
+          type: integer
+          description: Maximum number of messages to return.
+    ReceivedMessage:
+      type: object
+      properties:
+        ackId:
+          type: string
+        message:
+          $ref: '#/components/schemas/PubsubMessage'
+        deliveryAttempt:
+          type: integer
+    PubsubMessage:
+      type: object
+      properties:
+        data:
+          type: string
+          format: byte
+          description: The message data (base64-encoded).
+        attributes:
+          type: object
+          additionalProperties:
+            type: string
+        messageId:
+          type: string
+        publishTime:
+          type: string
+          format: date-time
+        orderingKey:
+          type: string
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          tokenUrl: https://oauth2.googleapis.com/token
+          scopes:
+            https://www.googleapis.com/auth/pubsub: Manage Pub/Sub resources
+            https://www.googleapis.com/auth/cloud-platform: Full access to Google Cloud
+    bearerAuth:
+      type: http
+      scheme: bearer

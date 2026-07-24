@@ -1,0 +1,247 @@
+openapi: 3.1.0
+info:
+  title: Google Pub/Sub Google Cloud Pub/Sub Publish Subscriptions API
+  description: Provides reliable, many-to-many, asynchronous messaging between applications. The Pub/Sub API allows you to create and manage topics and subscriptions, publish messages, and pull or push messages to subscribers.
+  version: v1
+  contact:
+    name: Google Cloud
+    url: https://cloud.google.com/pubsub
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: https://pubsub.googleapis.com
+  description: Google Cloud Pub/Sub API
+security:
+- oauth2:
+  - https://www.googleapis.com/auth/pubsub
+- bearerAuth: []
+tags:
+- name: Subscriptions
+  description: Manage Pub/Sub subscriptions
+paths:
+  /v1/projects/{project}/subscriptions:
+    get:
+      operationId: listSubscriptions
+      summary: Google Pub/Sub List subscriptions
+      description: Lists matching subscriptions in the given project.
+      tags:
+      - Subscriptions
+      parameters:
+      - name: project
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+      - name: pageToken
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSubscriptionsResponse'
+  /v1/projects/{project}/subscriptions/{subscription}:
+    get:
+      operationId: getSubscription
+      summary: Google Pub/Sub Get a subscription
+      description: Gets the configuration details of a subscription.
+      tags:
+      - Subscriptions
+      parameters:
+      - name: project
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: subscription
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+    put:
+      operationId: createSubscription
+      summary: Google Pub/Sub Create a subscription
+      description: Creates a subscription to a given topic. If the subscription already exists, returns ALREADY_EXISTS.
+      tags:
+      - Subscriptions
+      parameters:
+      - name: project
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: subscription
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Subscription'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+    delete:
+      operationId: deleteSubscription
+      summary: Google Pub/Sub Delete a subscription
+      description: Deletes an existing subscription.
+      tags:
+      - Subscriptions
+      parameters:
+      - name: project
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: subscription
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+components:
+  schemas:
+    Subscription:
+      type: object
+      properties:
+        name:
+          type: string
+        topic:
+          type: string
+        pushConfig:
+          $ref: '#/components/schemas/PushConfig'
+        bigqueryConfig:
+          type: object
+          properties:
+            table:
+              type: string
+            useTopicSchema:
+              type: boolean
+            writeMetadata:
+              type: boolean
+            dropUnknownFields:
+              type: boolean
+        cloudStorageConfig:
+          type: object
+          properties:
+            bucket:
+              type: string
+            filenamePrefix:
+              type: string
+            filenameSuffix:
+              type: string
+            maxDuration:
+              type: string
+            maxBytes:
+              type: string
+              format: int64
+        ackDeadlineSeconds:
+          type: integer
+        retainAckedMessages:
+          type: boolean
+        messageRetentionDuration:
+          type: string
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+        enableMessageOrdering:
+          type: boolean
+        expirationPolicy:
+          type: object
+          properties:
+            ttl:
+              type: string
+        filter:
+          type: string
+        deadLetterPolicy:
+          type: object
+          properties:
+            deadLetterTopic:
+              type: string
+            maxDeliveryAttempts:
+              type: integer
+        retryPolicy:
+          type: object
+          properties:
+            minimumBackoff:
+              type: string
+            maximumBackoff:
+              type: string
+        detached:
+          type: boolean
+        enableExactlyOnceDelivery:
+          type: boolean
+        state:
+          type: string
+          enum:
+          - STATE_UNSPECIFIED
+          - ACTIVE
+          - RESOURCE_ERROR
+    PushConfig:
+      type: object
+      properties:
+        pushEndpoint:
+          type: string
+        attributes:
+          type: object
+          additionalProperties:
+            type: string
+        oidcToken:
+          type: object
+          properties:
+            serviceAccountEmail:
+              type: string
+            audience:
+              type: string
+        noWrapper:
+          type: object
+          properties:
+            writeMetadata:
+              type: boolean
+    ListSubscriptionsResponse:
+      type: object
+      properties:
+        subscriptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Subscription'
+        nextPageToken:
+          type: string
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          tokenUrl: https://oauth2.googleapis.com/token
+          scopes:
+            https://www.googleapis.com/auth/pubsub: Manage Pub/Sub resources
+            https://www.googleapis.com/auth/cloud-platform: Full access to Google Cloud
+    bearerAuth:
+      type: http
+      scheme: bearer

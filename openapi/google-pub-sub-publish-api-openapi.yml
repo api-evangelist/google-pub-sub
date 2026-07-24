@@ -1,0 +1,98 @@
+openapi: 3.1.0
+info:
+  title: Google Pub/Sub Google Cloud Pub/Sub Publish API
+  description: Provides reliable, many-to-many, asynchronous messaging between applications. The Pub/Sub API allows you to create and manage topics and subscriptions, publish messages, and pull or push messages to subscribers.
+  version: v1
+  contact:
+    name: Google Cloud
+    url: https://cloud.google.com/pubsub
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: https://pubsub.googleapis.com
+  description: Google Cloud Pub/Sub API
+security:
+- oauth2:
+  - https://www.googleapis.com/auth/pubsub
+- bearerAuth: []
+tags:
+- name: Publish
+  description: Publish messages to topics
+paths:
+  /v1/{topic}:publish:
+    post:
+      operationId: publish
+      summary: Google Pub/Sub Publish messages
+      description: Adds one or more messages to the topic. Returns NOT_FOUND if the topic does not exist.
+      tags:
+      - Publish
+      parameters:
+      - name: topic
+        in: path
+        required: true
+        description: The topic name (e.g., projects/my-project/topics/my-topic).
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PublishRequest'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+components:
+  schemas:
+    PublishRequest:
+      type: object
+      required:
+      - messages
+      properties:
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/PubsubMessage'
+    PublishResponse:
+      type: object
+      properties:
+        messageIds:
+          type: array
+          items:
+            type: string
+    PubsubMessage:
+      type: object
+      properties:
+        data:
+          type: string
+          format: byte
+          description: The message data (base64-encoded).
+        attributes:
+          type: object
+          additionalProperties:
+            type: string
+        messageId:
+          type: string
+        publishTime:
+          type: string
+          format: date-time
+        orderingKey:
+          type: string
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          tokenUrl: https://oauth2.googleapis.com/token
+          scopes:
+            https://www.googleapis.com/auth/pubsub: Manage Pub/Sub resources
+            https://www.googleapis.com/auth/cloud-platform: Full access to Google Cloud
+    bearerAuth:
+      type: http
+      scheme: bearer
