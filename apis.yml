@@ -5,7 +5,20 @@ description: >-
   between independent applications, providing reliable, many-to-many, asynchronous messaging for event ingestion,
   streaming analytics, and event-driven computing.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/google-pub-sub.png
 tags:
   - Cloud
   - Event-Driven
@@ -18,33 +31,114 @@ created: '2026-03-26'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-  - aid: google-pub-sub:google-pub-sub
-    name: Google Pub/Sub
-    description: >-
-      Google Cloud Pub/Sub is a messaging and event ingestion service that provides durable message storage and
-      real-time message delivery for building event-driven systems and streaming data pipelines on Google Cloud
-      Platform.
-    humanURL: https://cloud.google.com/pubsub
-    tags:
-      - Cloud
-      - Event-Driven
-      - Google Cloud
-      - Messaging
-      - Pub/Sub
-      - Streaming
-    properties:
-      - type: OpenAPI
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/google-pub-sub/refs/heads/main/openapi/google-pub-sub-openapi.yml
-      - type: AsyncAPI
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/google-pub-sub/refs/heads/main/asyncapi/google-pub-sub-asyncapi.yml
-      - type: JSONSchema
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/google-pub-sub/refs/heads/main/json-schema/google-pub-sub-topic.yml
-      - type: JSONSchema
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/google-pub-sub/refs/heads/main/json-schema/google-pub-sub-message.yml
+- aid: google-pub-sub:google-pub-sub-publish-api
+  name: Google Pub/Sub Publish API
+  description: Publish messages to topics
+  humanURL: https://cloud.google.com/pubsub
+  tags:
+  - Publish
+  properties:
+  - type: OpenAPI
+    url: openapi/google-pub-sub-publish-api-openapi.yml
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/google-pub-sub/refs/heads/main/asyncapi/google-pub-sub-asyncapi.yml
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/google-pub-sub/refs/heads/main/json-schema/google-pub-sub-topic.yml
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/google-pub-sub/refs/heads/main/json-schema/google-pub-sub-message.yml
+- aid: google-pub-sub:google-pub-sub-schemas-api
+  name: Google Pub/Sub Schemas API
+  description: Manage Pub/Sub schemas
+  humanURL: https://cloud.google.com/pubsub
+  tags:
+  - Schemas
+  properties:
+  - type: OpenAPI
+    url: openapi/google-pub-sub-schemas-api-openapi.yml
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/google-pub-sub/refs/heads/main/asyncapi/google-pub-sub-asyncapi.yml
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/google-pub-sub/refs/heads/main/json-schema/google-pub-sub-topic.yml
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/google-pub-sub/refs/heads/main/json-schema/google-pub-sub-message.yml
+- aid: google-pub-sub:google-pub-sub-snapshots-api
+  name: Google Pub/Sub Snapshots API
+  description: Manage subscription snapshots
+  humanURL: https://cloud.google.com/pubsub
+  tags:
+  - Snapshots
+  properties:
+  - type: OpenAPI
+    url: openapi/google-pub-sub-snapshots-api-openapi.yml
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/google-pub-sub/refs/heads/main/asyncapi/google-pub-sub-asyncapi.yml
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/google-pub-sub/refs/heads/main/json-schema/google-pub-sub-topic.yml
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/google-pub-sub/refs/heads/main/json-schema/google-pub-sub-message.yml
+- aid: google-pub-sub:google-pub-sub-subscribe-api
+  name: Google Pub/Sub Subscribe API
+  description: Pull and acknowledge messages
+  humanURL: https://cloud.google.com/pubsub
+  tags:
+  - Subscribe
+  properties:
+  - type: OpenAPI
+    url: openapi/google-pub-sub-subscribe-api-openapi.yml
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/google-pub-sub/refs/heads/main/asyncapi/google-pub-sub-asyncapi.yml
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/google-pub-sub/refs/heads/main/json-schema/google-pub-sub-topic.yml
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/google-pub-sub/refs/heads/main/json-schema/google-pub-sub-message.yml
+- aid: google-pub-sub:google-pub-sub-subscriptions-api
+  name: Google Pub/Sub Subscriptions API
+  description: Manage Pub/Sub subscriptions
+  humanURL: https://cloud.google.com/pubsub
+  tags:
+  - Subscriptions
+  properties:
+  - type: OpenAPI
+    url: openapi/google-pub-sub-subscriptions-api-openapi.yml
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/google-pub-sub/refs/heads/main/asyncapi/google-pub-sub-asyncapi.yml
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/google-pub-sub/refs/heads/main/json-schema/google-pub-sub-topic.yml
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/google-pub-sub/refs/heads/main/json-schema/google-pub-sub-message.yml
+- aid: google-pub-sub:google-pub-sub-topics-api
+  name: Google Pub/Sub Topics API
+  description: Manage Pub/Sub topics
+  humanURL: https://cloud.google.com/pubsub
+  tags:
+  - Topics
+  properties:
+  - type: OpenAPI
+    url: openapi/google-pub-sub-topics-api-openapi.yml
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/google-pub-sub/refs/heads/main/asyncapi/google-pub-sub-asyncapi.yml
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/google-pub-sub/refs/heads/main/json-schema/google-pub-sub-topic.yml
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/google-pub-sub/refs/heads/main/json-schema/google-pub-sub-message.yml
 common:
   - type: AgenticAccess
     url: agentic-access/google-pub-sub-agentic-access.yml
