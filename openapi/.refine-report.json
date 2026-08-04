@@ -1,0 +1,24 @@
+{
+  "provider": "google-pub-sub",
+  "sources": [
+    "google-pub-sub-publish-api-openapi.yml",
+    "google-pub-sub-schemas-api-openapi.yml",
+    "google-pub-sub-snapshots-api-openapi.yml",
+    "google-pub-sub-subscribe-api-openapi.yml",
+    "google-pub-sub-subscriptions-api-openapi.yml",
+    "google-pub-sub-topics-api-openapi.yml"
+  ],
+  "outputs": [
+    "google-pub-sub-publish-api-openapi.yml",
+    "google-pub-sub-schemas-api-openapi.yml",
+    "google-pub-sub-snapshots-api-openapi.yml",
+    "google-pub-sub-subscribe-api-openapi.yml",
+    "google-pub-sub-subscriptions-api-openapi.yml",
+    "google-pub-sub-topics-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
