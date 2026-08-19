@@ -1,0 +1,97 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Google Pub/Sub Google Cloud Pub/Sub Publish Subscribe API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "accessTokenUrl": "https://oauth2.googleapis.com/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Subscribe",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Google Pub/Sub Pull messages",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://pubsub.googleapis.com/v1/:subscription:pull",
+            "params": [
+              {
+                "name": "subscription",
+                "value": "",
+                "type": "path",
+                "description": "The subscription name."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Pulls messages from the server. The server may return UNAVAILABLE if there are too many concurrent pull requests pending for the given subscription."
+        },
+        {
+          "info": {
+            "name": "Google Pub/Sub Acknowledge messages",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://pubsub.googleapis.com/v1/:subscription:acknowledge",
+            "params": [
+              {
+                "name": "subscription",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Acknowledges the messages associated with the ack_ids in the AcknowledgeRequest. The Pub/Sub system can remove the relevant messages from the subscription."
+        },
+        {
+          "info": {
+            "name": "Google Pub/Sub Modify acknowledgement deadline",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://pubsub.googleapis.com/v1/:subscription:modifyAckDeadline",
+            "params": [
+              {
+                "name": "subscription",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modifies the ack deadline for a specific message. Useful to indicate that more time is needed to process a message."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

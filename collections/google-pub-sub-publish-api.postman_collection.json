@@ -1,0 +1,164 @@
+{
+  "item": [
+    {
+      "id": "ebf570b4-b275-4ad1-8d85-d62c7d427b1f",
+      "name": "Publish",
+      "description": {
+        "content": "Publish messages to topics",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e7bbb9de-46a7-4cff-b674-dee6f0269f5f",
+          "name": "Google Pub/Sub Publish messages",
+          "request": {
+            "name": "Google Pub/Sub Publish messages",
+            "description": {
+              "content": "Adds one or more messages to the topic. Returns NOT_FOUND if the topic does not exist.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "{{topic}}:publish"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"messages\": [\n    {\n      \"data\": \"<byte>\",\n      \"attributes\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\"\n      },\n      \"messageId\": \"<string>\",\n      \"publishTime\": \"<dateTime>\",\n      \"orderingKey\": \"<string>\"\n    },\n    {\n      \"data\": \"<byte>\",\n      \"attributes\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\"\n      },\n      \"messageId\": \"<string>\",\n      \"publishTime\": \"<dateTime>\",\n      \"orderingKey\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "332a635c-7392-4e67-9e49-974136828d0c",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "{{topic}}:publish"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"messages\": [\n    {\n      \"data\": \"string\",\n      \"attributes\": {\n        \"key_0\": \"string\"\n      },\n      \"messageId\": \"string\",\n      \"publishTime\": \"1996-07-17T16:08:51.693Z\",\n      \"orderingKey\": \"string\"\n    },\n    {\n      \"data\": \"string\",\n      \"attributes\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\",\n        \"key_3\": \"string\",\n        \"key_4\": \"string\"\n      },\n      \"messageId\": \"string\",\n      \"publishTime\": \"1948-03-23T19:15:20.634Z\",\n      \"orderingKey\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"messageIds\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://pubsub.googleapis.com",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) The topic name (e.g., projects/my-project/topics/my-topic).",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "topic"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "https://www.googleapis.com/auth/pubsub https://www.googleapis.com/auth/cloud-platform"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://oauth2.googleapis.com/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://accounts.google.com/o/oauth2/auth"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ca94babd-7d46-43f7-949a-a2b3e7c03465",
+    "name": "Google Pub/Sub Google Cloud Pub/Sub Publish API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Provides reliable, many-to-many, asynchronous messaging between applications. The Pub/Sub API allows you to create and manage topics and subscriptions, publish messages, and pull or push messages to subscribers.\n\nContact Support:\n Name: Google Cloud",
+      "type": "text/plain"
+    }
+  }
+}

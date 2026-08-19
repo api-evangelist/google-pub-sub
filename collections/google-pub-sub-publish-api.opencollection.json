@@ -1,0 +1,53 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Google Pub/Sub Google Cloud Pub/Sub Publish API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "accessTokenUrl": "https://oauth2.googleapis.com/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Publish",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Google Pub/Sub Publish messages",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://pubsub.googleapis.com/v1/:topic:publish",
+            "params": [
+              {
+                "name": "topic",
+                "value": "",
+                "type": "path",
+                "description": "The topic name (e.g., projects/my-project/topics/my-topic)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds one or more messages to the topic. Returns NOT_FOUND if the topic does not exist."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,131 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Google Pub/Sub Google Cloud Pub/Sub Publish Snapshots API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "accessTokenUrl": "https://oauth2.googleapis.com/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Snapshots",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Google Pub/Sub List snapshots",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://pubsub.googleapis.com/v1/projects/:project/snapshots",
+            "params": [
+              {
+                "name": "project",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageToken",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lists the existing snapshots in the given project."
+        },
+        {
+          "info": {
+            "name": "Google Pub/Sub Get a snapshot",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://pubsub.googleapis.com/v1/projects/:project/snapshots/:snapshot",
+            "params": [
+              {
+                "name": "project",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "snapshot",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Gets the configuration details of a snapshot."
+        },
+        {
+          "info": {
+            "name": "Google Pub/Sub Create a snapshot",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://pubsub.googleapis.com/v1/projects/:project/snapshots/:snapshot",
+            "params": [
+              {
+                "name": "project",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "snapshot",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a snapshot from the requested subscription. Snapshots are used for the seek operation."
+        },
+        {
+          "info": {
+            "name": "Google Pub/Sub Delete a snapshot",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://pubsub.googleapis.com/v1/projects/:project/snapshots/:snapshot",
+            "params": [
+              {
+                "name": "project",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "snapshot",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Removes an existing snapshot."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

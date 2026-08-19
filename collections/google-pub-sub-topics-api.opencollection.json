@@ -1,0 +1,157 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Google Pub/Sub Google Cloud Pub/Sub Publish Topics API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "accessTokenUrl": "https://oauth2.googleapis.com/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Topics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Google Pub/Sub List topics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://pubsub.googleapis.com/v1/projects/:project/topics",
+            "params": [
+              {
+                "name": "project",
+                "value": "",
+                "type": "path",
+                "description": "The project ID (e.g., projects/my-project)."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of topics to return."
+              },
+              {
+                "name": "pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Token for pagination."
+              }
+            ]
+          },
+          "docs": "Lists matching topics in the given project."
+        },
+        {
+          "info": {
+            "name": "Google Pub/Sub Get a topic",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://pubsub.googleapis.com/v1/projects/:project/topics/:topic",
+            "params": [
+              {
+                "name": "project",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "topic",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Gets the configuration of a topic."
+        },
+        {
+          "info": {
+            "name": "Google Pub/Sub Create a topic",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://pubsub.googleapis.com/v1/projects/:project/topics/:topic",
+            "params": [
+              {
+                "name": "project",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "topic",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates the given topic with the given name. The topic name must be unique within the project."
+        },
+        {
+          "info": {
+            "name": "Google Pub/Sub Delete a topic",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://pubsub.googleapis.com/v1/projects/:project/topics/:topic",
+            "params": [
+              {
+                "name": "project",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "topic",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes the topic with the given name. Existing subscriptions to this topic are not deleted but their topic field is set to _deleted-topic_."
+        },
+        {
+          "info": {
+            "name": "Google Pub/Sub Update a topic",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://pubsub.googleapis.com/v1/:topic",
+            "params": [
+              {
+                "name": "topic",
+                "value": "",
+                "type": "path",
+                "description": "The name of the topic (e.g., projects/my-project/topics/my-topic)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing topic by updating the fields specified in the update mask."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
