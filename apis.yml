@@ -73,6 +73,8 @@ apis:
   description: Manage Pub/Sub schemas
   humanURL: https://cloud.google.com/pubsub
   tags:
+  - Schema
+  tags_raw:
   - Schemas
   properties:
   - type: OpenAPI
@@ -147,6 +149,8 @@ apis:
   description: Manage Pub/Sub topics
   humanURL: https://cloud.google.com/pubsub
   tags:
+  - Topic
+  tags_raw:
   - Topics
   properties:
   - type: OpenAPI
