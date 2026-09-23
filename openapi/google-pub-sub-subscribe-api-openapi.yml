@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Google Pub/Sub Google Cloud Pub/Sub Publish Subscribe API
+  title: Google Pub/Sub Google Cloud Pub/Sub Subscribe API
   description: Provides reliable, many-to-many, asynchronous messaging between applications. The Pub/Sub API allows you to create and manage topics and subscriptions, publish messages, and pull or push messages to subscribers.
   version: v1
   contact:
@@ -110,30 +110,6 @@ paths:
           description: Successful response
 components:
   schemas:
-    PullResponse:
-      type: object
-      properties:
-        receivedMessages:
-          type: array
-          items:
-            $ref: '#/components/schemas/ReceivedMessage'
-    PullRequest:
-      type: object
-      required:
-      - maxMessages
-      properties:
-        maxMessages:
-          type: integer
-          description: Maximum number of messages to return.
-    ReceivedMessage:
-      type: object
-      properties:
-        ackId:
-          type: string
-        message:
-          $ref: '#/components/schemas/PubsubMessage'
-        deliveryAttempt:
-          type: integer
     PubsubMessage:
       type: object
       properties:
@@ -152,6 +128,30 @@ components:
           format: date-time
         orderingKey:
           type: string
+    ReceivedMessage:
+      type: object
+      properties:
+        ackId:
+          type: string
+        message:
+          $ref: '#/components/schemas/PubsubMessage'
+        deliveryAttempt:
+          type: integer
+    PullResponse:
+      type: object
+      properties:
+        receivedMessages:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReceivedMessage'
+    PullRequest:
+      type: object
+      required:
+      - maxMessages
+      properties:
+        maxMessages:
+          type: integer
+          description: Maximum number of messages to return.
   securitySchemes:
     oauth2:
       type: oauth2

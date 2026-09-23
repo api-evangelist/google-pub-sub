@@ -1,12 +1,7 @@
 {
   "provider": "google-pub-sub",
   "sources": [
-    "google-pub-sub-publish-api-openapi.yml",
-    "google-pub-sub-schemas-api-openapi.yml",
-    "google-pub-sub-snapshots-api-openapi.yml",
-    "google-pub-sub-subscribe-api-openapi.yml",
-    "google-pub-sub-subscriptions-api-openapi.yml",
-    "google-pub-sub-topics-api-openapi.yml"
+    "_original/google-pub-sub-openapi.yml"
   ],
   "outputs": [
     "google-pub-sub-publish-api-openapi.yml",
@@ -19,6 +14,17 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "google-pub-sub-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "google-pub-sub-publish-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "google-pub-sub-schemas-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "google-pub-sub-snapshots-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "google-pub-sub-subscribe-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "google-pub-sub-subscriptions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "google-pub-sub-topics-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

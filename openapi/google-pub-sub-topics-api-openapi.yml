@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Google Pub/Sub Google Cloud Pub/Sub Publish Topics API
+  title: Google Pub/Sub Google Cloud Pub/Sub Topics API
   description: Provides reliable, many-to-many, asynchronous messaging between applications. The Pub/Sub API allows you to create and manage topics and subscriptions, publish messages, and pull or push messages to subscribers.
   version: v1
   contact:
@@ -159,6 +159,15 @@ paths:
                 $ref: '#/components/schemas/Topic'
 components:
   schemas:
+    ListTopicsResponse:
+      type: object
+      properties:
+        topics:
+          type: array
+          items:
+            $ref: '#/components/schemas/Topic'
+        nextPageToken:
+          type: string
     Topic:
       type: object
       properties:
@@ -205,15 +214,6 @@ components:
           - STATE_UNSPECIFIED
           - ACTIVE
           - INGESTION_RESOURCE_ERROR
-    ListTopicsResponse:
-      type: object
-      properties:
-        topics:
-          type: array
-          items:
-            $ref: '#/components/schemas/Topic'
-        nextPageToken:
-          type: string
   securitySchemes:
     oauth2:
       type: oauth2

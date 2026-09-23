@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Google Pub/Sub Google Cloud Pub/Sub Publish Subscriptions API
+  title: Google Pub/Sub Google Cloud Pub/Sub Subscriptions API
   description: Provides reliable, many-to-many, asynchronous messaging between applications. The Pub/Sub API allows you to create and manage topics and subscriptions, publish messages, and pull or push messages to subscribers.
   version: v1
   contact:
@@ -125,6 +125,36 @@ paths:
           description: Successful response
 components:
   schemas:
+    PushConfig:
+      type: object
+      properties:
+        pushEndpoint:
+          type: string
+        attributes:
+          type: object
+          additionalProperties:
+            type: string
+        oidcToken:
+          type: object
+          properties:
+            serviceAccountEmail:
+              type: string
+            audience:
+              type: string
+        noWrapper:
+          type: object
+          properties:
+            writeMetadata:
+              type: boolean
+    ListSubscriptionsResponse:
+      type: object
+      properties:
+        subscriptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Subscription'
+        nextPageToken:
+          type: string
     Subscription:
       type: object
       properties:
@@ -202,36 +232,6 @@ components:
           - STATE_UNSPECIFIED
           - ACTIVE
           - RESOURCE_ERROR
-    PushConfig:
-      type: object
-      properties:
-        pushEndpoint:
-          type: string
-        attributes:
-          type: object
-          additionalProperties:
-            type: string
-        oidcToken:
-          type: object
-          properties:
-            serviceAccountEmail:
-              type: string
-            audience:
-              type: string
-        noWrapper:
-          type: object
-          properties:
-            writeMetadata:
-              type: boolean
-    ListSubscriptionsResponse:
-      type: object
-      properties:
-        subscriptions:
-          type: array
-          items:
-            $ref: '#/components/schemas/Subscription'
-        nextPageToken:
-          type: string
   securitySchemes:
     oauth2:
       type: oauth2
