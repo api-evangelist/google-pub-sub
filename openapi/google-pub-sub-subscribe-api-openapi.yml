@@ -110,6 +110,13 @@ paths:
           description: Successful response
 components:
   schemas:
+    PullResponse:
+      type: object
+      properties:
+        receivedMessages:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReceivedMessage'
     PubsubMessage:
       type: object
       properties:
@@ -137,13 +144,6 @@ components:
           $ref: '#/components/schemas/PubsubMessage'
         deliveryAttempt:
           type: integer
-    PullResponse:
-      type: object
-      properties:
-        receivedMessages:
-          type: array
-          items:
-            $ref: '#/components/schemas/ReceivedMessage'
     PullRequest:
       type: object
       required:
