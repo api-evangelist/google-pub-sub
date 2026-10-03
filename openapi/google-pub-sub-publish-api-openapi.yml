@@ -49,13 +49,15 @@ paths:
                 $ref: '#/components/schemas/PublishResponse'
 components:
   schemas:
-    PublishResponse:
+    PublishRequest:
       type: object
+      required:
+      - messages
       properties:
-        messageIds:
+        messages:
           type: array
           items:
-            type: string
+            $ref: '#/components/schemas/PubsubMessage'
     PubsubMessage:
       type: object
       properties:
@@ -74,15 +76,13 @@ components:
           format: date-time
         orderingKey:
           type: string
-    PublishRequest:
+    PublishResponse:
       type: object
-      required:
-      - messages
       properties:
-        messages:
+        messageIds:
           type: array
           items:
-            $ref: '#/components/schemas/PubsubMessage'
+            type: string
   securitySchemes:
     oauth2:
       type: oauth2

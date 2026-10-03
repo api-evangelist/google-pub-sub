@@ -134,15 +134,6 @@ paths:
           description: Successful response
 components:
   schemas:
-    ListSnapshotsResponse:
-      type: object
-      properties:
-        snapshots:
-          type: array
-          items:
-            $ref: '#/components/schemas/Snapshot'
-        nextPageToken:
-          type: string
     Snapshot:
       type: object
       properties:
@@ -157,6 +148,15 @@ components:
           type: object
           additionalProperties:
             type: string
+    ListSnapshotsResponse:
+      type: object
+      properties:
+        snapshots:
+          type: array
+          items:
+            $ref: '#/components/schemas/Snapshot'
+        nextPageToken:
+          type: string
   securitySchemes:
     oauth2:
       type: oauth2
