@@ -125,15 +125,6 @@ paths:
           description: Successful response
 components:
   schemas:
-    ListSubscriptionsResponse:
-      type: object
-      properties:
-        subscriptions:
-          type: array
-          items:
-            $ref: '#/components/schemas/Subscription'
-        nextPageToken:
-          type: string
     Subscription:
       type: object
       properties:
@@ -232,6 +223,15 @@ components:
           properties:
             writeMetadata:
               type: boolean
+    ListSubscriptionsResponse:
+      type: object
+      properties:
+        subscriptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Subscription'
+        nextPageToken:
+          type: string
   securitySchemes:
     oauth2:
       type: oauth2

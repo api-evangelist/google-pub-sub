@@ -118,15 +118,6 @@ components:
         maxMessages:
           type: integer
           description: Maximum number of messages to return.
-    ReceivedMessage:
-      type: object
-      properties:
-        ackId:
-          type: string
-        message:
-          $ref: '#/components/schemas/PubsubMessage'
-        deliveryAttempt:
-          type: integer
     PubsubMessage:
       type: object
       properties:
@@ -152,6 +143,15 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ReceivedMessage'
+    ReceivedMessage:
+      type: object
+      properties:
+        ackId:
+          type: string
+        message:
+          $ref: '#/components/schemas/PubsubMessage'
+        deliveryAttempt:
+          type: integer
   securitySchemes:
     oauth2:
       type: oauth2
