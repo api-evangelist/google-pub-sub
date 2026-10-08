@@ -169,6 +169,12 @@ apis:
     url: >-
       https://raw.githubusercontent.com/api-evangelist/google-pub-sub/refs/heads/main/json-schema/google-pub-sub-message.yml
 common:
+  - type: Plans
+    url: plans/google-pub-sub-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/google-pub-sub-rate-limits.yml
+  - type: FinOps
+    url: finops/google-pub-sub-finops.yml
   - type: AgenticAccess
     url: agentic-access/google-pub-sub-agentic-access.yml
   - type: VulnerabilityDisclosure
