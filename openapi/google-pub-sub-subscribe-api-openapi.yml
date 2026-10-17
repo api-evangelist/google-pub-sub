@@ -110,14 +110,13 @@ paths:
           description: Successful response
 components:
   schemas:
-    PullRequest:
+    PullResponse:
       type: object
-      required:
-      - maxMessages
       properties:
-        maxMessages:
-          type: integer
-          description: Maximum number of messages to return.
+        receivedMessages:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReceivedMessage'
     PubsubMessage:
       type: object
       properties:
@@ -136,13 +135,6 @@ components:
           format: date-time
         orderingKey:
           type: string
-    PullResponse:
-      type: object
-      properties:
-        receivedMessages:
-          type: array
-          items:
-            $ref: '#/components/schemas/ReceivedMessage'
     ReceivedMessage:
       type: object
       properties:
@@ -152,6 +144,14 @@ components:
           $ref: '#/components/schemas/PubsubMessage'
         deliveryAttempt:
           type: integer
+    PullRequest:
+      type: object
+      required:
+      - maxMessages
+      properties:
+        maxMessages:
+          type: integer
+          description: Maximum number of messages to return.
   securitySchemes:
     oauth2:
       type: oauth2

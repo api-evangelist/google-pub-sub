@@ -125,6 +125,36 @@ paths:
           description: Successful response
 components:
   schemas:
+    ListSubscriptionsResponse:
+      type: object
+      properties:
+        subscriptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Subscription'
+        nextPageToken:
+          type: string
+    PushConfig:
+      type: object
+      properties:
+        pushEndpoint:
+          type: string
+        attributes:
+          type: object
+          additionalProperties:
+            type: string
+        oidcToken:
+          type: object
+          properties:
+            serviceAccountEmail:
+              type: string
+            audience:
+              type: string
+        noWrapper:
+          type: object
+          properties:
+            writeMetadata:
+              type: boolean
     Subscription:
       type: object
       properties:
@@ -202,36 +232,6 @@ components:
           - STATE_UNSPECIFIED
           - ACTIVE
           - RESOURCE_ERROR
-    PushConfig:
-      type: object
-      properties:
-        pushEndpoint:
-          type: string
-        attributes:
-          type: object
-          additionalProperties:
-            type: string
-        oidcToken:
-          type: object
-          properties:
-            serviceAccountEmail:
-              type: string
-            audience:
-              type: string
-        noWrapper:
-          type: object
-          properties:
-            writeMetadata:
-              type: boolean
-    ListSubscriptionsResponse:
-      type: object
-      properties:
-        subscriptions:
-          type: array
-          items:
-            $ref: '#/components/schemas/Subscription'
-        nextPageToken:
-          type: string
   securitySchemes:
     oauth2:
       type: oauth2
