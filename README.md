@@ -1,4 +1,4 @@
-# Google Pub/Sub (google-pub-sub)
+# Google Pub/Sub
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,63 +66,154 @@
 
 Google Cloud Pub/Sub is a fully managed, real-time messaging service that allows you to send and receive messages between independent applications, providing reliable, many-to-many, asynchronous messaging for event ingestion, streaming analytics, and event-driven computing.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/google-pub-sub/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/google-pub-sub/refs/heads/main/apis.yml)
+**Areas:** Cloud · Event-Driven · Google Cloud · Messaging · Pub/Sub · Streaming
 
-## Scope
+## Google Pub/Sub on APIs.io
 
-- **Type:** Index
+Everything profiled for Google Pub/Sub is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/google-pub-sub/](https://apis.io/providers/google-pub-sub/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (6)
 
-- Cloud
-- Event-Driven
-- Google Cloud
-- Messaging
-- Pub/Sub
-- Streaming
+- [Google Pub/Sub Publish API](https://apis.io/apis/google-pub-sub/google-pub-sub-publish-api/) — Publish messages to topics
+- [Google Pub/Sub Schemas API](https://apis.io/apis/google-pub-sub/google-pub-sub-schemas-api/) — Manage Pub/Sub schemas
+- [Google Pub/Sub Snapshots API](https://apis.io/apis/google-pub-sub/google-pub-sub-snapshots-api/) — Manage subscription snapshots
+- [Google Pub/Sub Subscribe API](https://apis.io/apis/google-pub-sub/google-pub-sub-subscribe-api/) — Pull and acknowledge messages
+- [Google Pub/Sub Subscriptions API](https://apis.io/apis/google-pub-sub/google-pub-sub-subscriptions-api/) — Manage Pub/Sub subscriptions
+- [Google Pub/Sub Topics API](https://apis.io/apis/google-pub-sub/google-pub-sub-topics-api/) — Manage Pub/Sub topics
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-03-26
-- **Modified:** 2026-05-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### AsyncAPI (1)
 
-### Google Pub/Sub
+Event-driven and webhook contracts.
 
-Google Cloud Pub/Sub is a messaging and event ingestion service that provides durable message storage and real-time message delivery for building event-driven systems and streaming data pipelines on Google Cloud Platform.
+- [Google Cloud Pub/Sub](https://apis.io/asyncapis/google-pub-sub/google-pub-sub-asyncapi/)
 
-- **Human URL:** [https://cloud.google.com/pubsub](https://cloud.google.com/pubsub)
+#### Event channels (2)
 
-#### Tags
+Individual events and webhooks the provider emits.
 
-- Cloud
-- Event-Driven
-- Google Cloud
-- Messaging
-- Pub/Sub
-- Streaming
+- [projects/{projectId}/subscriptions/{subscriptionId}](https://apis.io/channels/google-pub-sub/projects-projectid-subscriptions-subscriptionid/)
+- [projects/{projectId}/topics/{topicId}](https://apis.io/channels/google-pub-sub/projects-projectid-topics-topicid/)
 
-#### Properties
+#### Agentic access (1)
 
-- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/google-pub-sub/refs/heads/main/openapi/google-pub-sub-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [AsyncAPI](https://raw.githubusercontent.com/api-evangelist/google-pub-sub/refs/heads/main/asyncapi/google-pub-sub-asyncapi.yml) — [AsyncAPI Specification](https://www.asyncapi.com/docs/reference/specification/latest)
-- [JSON Schema](https://raw.githubusercontent.com/api-evangelist/google-pub-sub/refs/heads/main/json-schema/google-pub-sub-topic.yml) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](https://raw.githubusercontent.com/api-evangelist/google-pub-sub/refs/heads/main/json-schema/google-pub-sub-message.yml) — [JSON Schema](https://json-schema.org/specification)
-- [Postman Collection](collections/google-pub-sub.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/google-pub-sub.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Which operations an agent can call, which act, and which need a human in the loop.
 
-## Common Properties
+- [Google Pub Sub Agentic Access](https://apis.io/agentic-access/google-pub-sub/google-pub-sub-agentic-access/)
+
+#### Collections (7)
+
+Postman and Open Collection request collections.
+
+- [Google Pub/Sub Google Cloud Pub/Sub API](https://apis.io/collections/google-pub-sub/open-google-pub-sub/)
+- [Google Pub/Sub Google Cloud Pub/Sub Publish API](https://apis.io/collections/google-pub-sub/open-google-pub-sub-publish-api/)
+- [Google Pub/Sub Google Cloud Pub/Sub Publish Schemas API](https://apis.io/collections/google-pub-sub/open-google-pub-sub-schemas-api/)
+- [Google Pub/Sub Google Cloud Pub/Sub Publish Snapshots API](https://apis.io/collections/google-pub-sub/open-google-pub-sub-snapshots-api/)
+- [Google Pub/Sub Google Cloud Pub/Sub Publish Subscribe API](https://apis.io/collections/google-pub-sub/open-google-pub-sub-subscribe-api/)
+- [Google Pub/Sub Google Cloud Pub/Sub Publish Subscriptions API](https://apis.io/collections/google-pub-sub/open-google-pub-sub-subscriptions-api/)
+- [Google Pub/Sub Google Cloud Pub/Sub Publish Topics API](https://apis.io/collections/google-pub-sub/open-google-pub-sub-topics-api/)
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [Google Pub/Sub — asyncapi rules](https://apis.io/rules/google-pub-sub/google-pub-sub-asyncapi-spectral-rules/)
+- [Google Pub/Sub — jsonschema rules](https://apis.io/rules/google-pub-sub/google-pub-sub-jsonschema-spectral-rules/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Google Pub Sub Authentication](https://apis.io/security/google-pub-sub/google-pub-sub-authentication/)
+- [Google Pub Sub Domain Security](https://apis.io/security/google-pub-sub/google-pub-sub-domain-security/)
+- [Google Pub Sub Vulnerability Disclosure](https://apis.io/security/google-pub-sub/google-pub-sub-vulnerability-disclosure/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Google Pub Sub Scopes](https://apis.io/scopes/google-pub-sub/google-pub-sub-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Google Pub Sub Plans Pricing](https://apis.io/plans/google-pub-sub/google-pub-sub-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Google Pub Sub Rate Limits](https://apis.io/rate-limits/google-pub-sub/google-pub-sub-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Google Pub Sub Finops](https://apis.io/finops/google-pub-sub/google-pub-sub-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://cloud.google.com/pubsub)
 - [Documentation](https://cloud.google.com/pubsub/docs)
-- [Getting Started](https://cloud.google.com/pubsub/docs/quickstarts)
+- [Getting started](https://cloud.google.com/pubsub/docs/quickstarts)
 - [Pricing](https://cloud.google.com/pubsub/pricing)
-- [Git Hub](https://github.com/googleapis/google-cloud-go)
 - [Blog](https://cloud.google.com/blog)
-- [Integrations](https://cloud.google.com/marketplace)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 36.6** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 57.1 |
+| Contract quality | 62.4 |
+| Contract governance | 13.6 |
+| Operational transparency | 13.2 |
+| Developer ergonomics | 35.7 |
+| Access clarity | 18.4 |
+
+**Agent readiness 24.0** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | negotiable (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | derived (partial credit) |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | documented (partial credit) |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 27.5** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/google-pub-sub/](https://apis.io/providers/google-pub-sub/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Google Pub/Sub: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/google-pub-sub/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
